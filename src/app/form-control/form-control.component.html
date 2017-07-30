@@ -1,0 +1,14 @@
+<div>
+  <md-input-container>
+    <input *ngIf="!isPassword" type="text" [formControl]="control" mdInput [placeholder]="placeholder">
+    <input *ngIf="isPassword" type="password" [formControl]="control" mdInput [placeholder]="placeholder">
+  </md-input-container>
+  <div *ngIf="control.errors">
+    <md-error *ngIf="control.errors.required && (control.touched || submitted)">
+      This field is required
+    </md-error>
+    <md-error *ngIf="control.errors.email && (control.touched || submitted)">
+      This is not a valid email
+    </md-error>
+  </div>
+</div>

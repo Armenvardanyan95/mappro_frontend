@@ -1,0 +1,4 @@
+<div *ngFor="let user of users">
+  <a href="">{{ user.firstName }} {{ user.lastName }}</a>
+</div>
+<div *ngIf="!users.length">No users here!</div>

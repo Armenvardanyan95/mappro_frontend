@@ -1,0 +1,16 @@
+app-header {
+  width: 100% !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+.forty-percent {
+  width: 40% !important;
+}
+
+div.alert-danger > div {
+  color: red;
+}
+

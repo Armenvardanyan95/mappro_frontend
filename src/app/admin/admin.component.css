@@ -1,0 +1,29 @@
+agm-map {
+  height: 550px;
+  width: 100%;
+  float: left;
+}
+
+app-header {
+  width: 100% !important;
+}
+
+.float-left{
+  float: left !important;
+}
+
+.example-card {
+  width: 400px;
+  float: right;
+}
+
+.card-with-map{
+  width: 1200px;
+  float: left;
+}
+
+app-footer {
+  /*position: absolute;*/
+  /*bottom: 0px;*/
+  width: 100%;
+}

@@ -1,0 +1,7 @@
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+md-toolbar {
+  width: 100% !important;
+}

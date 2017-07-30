@@ -1,0 +1,44 @@
+import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { MdSnackBar } from '@angular/material';
+
+import {ColorMarkerService} from 'app/common/services';
+
+@Component({
+  selector: 'app-color-marker',
+  templateUrl: './color-marker.component.html',
+  styleUrls: ['./color-marker.component.css']
+})
+export class ColorMarkerComponent implements OnInit {
+
+  public form: FormGroup;
+  public submitted: boolean = false;
+  public color: string = "#127bdc";
+
+  constructor(private formBuilder: FormBuilder, private colorMarkerService: ColorMarkerService,
+              private snackbar: MdSnackBar) {
+    this.form = formBuilder.group({
+      'name': ['', Validators.required],
+      'color': ['', Validators.required]
+    });
+  }
+
+  ngOnInit() {
+  }
+
+  setColor(color: string): void {
+    this.color = color;
+    this.form.controls['color'].setValue(color);
+  }
+
+  onSubmit(values: IColorMarker): void {
+    this.submitted = true;
+    if (this.form.valid) {
+      this.colorMarkerService.create(values).subscribe(
+        res => this.snackbar.open('Succesfully created a new color', 'OK'),
+        err => this.snackbar.open('Something went wrong', 'OK')
+      );
+    }
+  }
+
+}

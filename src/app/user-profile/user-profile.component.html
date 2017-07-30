@@ -1,0 +1,34 @@
+<h2 md-dialog-title>New User</h2>
+
+
+<form (ngSubmit)="onSubmit(form.value)">
+
+  <app-form-control [control]="form.controls['firstName']" [placeholder]="'First Name'" [submitted]="submitted">
+  </app-form-control>
+
+  <app-form-control [control]="form.controls['lastName']" [placeholder]="'Last Name'" [submitted]="submitted">
+  </app-form-control>
+
+  <app-form-control [control]="form.controls['username']" [placeholder]="'Username'" [submitted]="submitted">
+  </app-form-control>
+
+  <app-form-control [control]="form.controls['email']" [placeholder]="'Email'" [submitted]="submitted">
+  </app-form-control>
+
+  <app-form-control [control]="form.controls['password']" [placeholder]="'Password'"
+                    [submitted]="submitted" [isPassword]="true">
+  </app-form-control>
+
+  <app-form-control [control]="form.controls['confirmPassword']" [placeholder]="'Confirm Password'"
+                    [submitted]="submitted" [isPassword]="true">
+  </app-form-control>
+
+  <md-error *ngIf="form.errors && form.errors.passwordsDontMatch && ((form.controls['password'].touched && form.controls['confirmPassword']) || submitted)">
+    Passwords Don't Match
+  </md-error>
+
+  <div>
+    <button md-raised-button type="submit">Submit</button>
+  </div>
+
+</form>

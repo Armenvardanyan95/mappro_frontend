@@ -1,0 +1,10 @@
+<h2 (click)="showDetails()">{{ order.name + ': ' + order.id}} </h2>
+<button type="button" md-raised-button (click)="openEditDialog()">Edit</button>
+<md-list-item (click)="showDetails()">
+  <div *ngIf="order.isVisible">
+    <p>{{ order.userDetails.firstName + ' ' + order.userDetails.lastName }}</p>
+    <p>{{ order.mobilePhone }}</p>
+    <p>{{ order.date }}</p>
+    <p>{{ order.date }}</p>
+  </div>
+</md-list-item>
