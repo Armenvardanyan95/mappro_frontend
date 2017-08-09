@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header (showNewOrderFormChange)="toggleShowNewOrderForm($event)" [colors]="colors"></app-header>
 
 <md-card class="card-with-map">
   <agm-map
@@ -14,9 +14,6 @@
 
 </md-card>
 
-
-<button (click)="openNewColorDialog()" md-raised-button>New Color</button>
-<button (click)="showNewOrderForm = !showNewOrderForm" md-raised-button>New Order</button>
 
 <md-card class="float-right example-card" *ngIf="showNewOrderForm">
 

@@ -1,10 +1,16 @@
-<h2 (click)="showDetails()">{{ order.name + ': ' + order.id}} </h2>
-<button type="button" md-raised-button (click)="openEditDialog()">Edit</button>
-<md-list-item (click)="showDetails()">
-  <div *ngIf="order.isVisible">
-    <p>{{ order.userDetails.firstName + ' ' + order.userDetails.lastName }}</p>
-    <p>{{ order.mobilePhone }}</p>
-    <p>{{ order.date }}</p>
-    <p>{{ order.date }}</p>
-  </div>
-</md-list-item>
+<div>
+  <h4 (click)="showDetails()">{{ order.name + ': ' + order.id}} </h4>
+  <h6 class="inner-div">{{ order.address }}</h6>
+</div>
+<ng-container *ngIf="order.isVisible">
+    <md-list>
+      <md-list-item *ngIf="order.problem">{{ order.problem }}</md-list-item>
+      <md-list-item *ngIf="order.date || order.timeFrom || order.timeTo">
+        {{ order.date | date }} {{ order.timeFrom ? order.timeFrom : '' }}{{ order.timeTo ? (' - ' + order.timeTo) : '' }}
+      </md-list-item>
+      <md-list-item>{{ order.userDetails.firstName + ' ' + order.userDetails.lastName }}</md-list-item>
+      <md-list-item *ngIf="order.mobilePhone">{{ order.mobilePhone }}</md-list-item>
+      <button type="button" md-raised-button (click)="openEditDialog()">Edit</button>
+    </md-list>
+</ng-container>
+

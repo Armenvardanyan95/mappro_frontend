@@ -1,7 +1,11 @@
 <md-toolbar color="primary">
 
-  <div>
-    <button md-raised-button type="submit">Raised button</button>
+  <img  *ngFor="let color of colors" style="width: 30px; height: 30px;" src="http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png" />
+  <button (click)="openNewColorDialog()" md-raised-button>New Color</button>
+
+  <div class="float-right">
+    <button (click)="toggleShowNewOrderForm()" md-raised-button>New Order</button>
+    <button md-raised-button type="submit">Logout</button>
   </div>
 
 </md-toolbar>

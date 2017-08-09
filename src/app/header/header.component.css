@@ -5,3 +5,11 @@
 md-toolbar {
   width: 100% !important;
 }
+
+button {
+  color: black;
+}
+
+.float-right {
+  float: right;
+}

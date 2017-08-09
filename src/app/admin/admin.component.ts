@@ -29,8 +29,7 @@ export class AdminComponent implements OnInit {
   lat: number = 51.678418;
   lng: number = 7.809007;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder,
-              private dialog: MdDialog, private colorMarkerService: ColorMarkerService,
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private colorMarkerService: ColorMarkerService,
               private googleMapsService: GoogleMapsService, private orderService: OrderService,
               private snackBar: MdSnackBar) {
   }
@@ -73,10 +72,6 @@ export class AdminComponent implements OnInit {
       .subscribe((order: IOrder) => this.orders.push(order));
   }
 
-  openNewColorDialog(): void {
-    const dialog = this.dialog.open(ColorMarkerComponent);
-  }
-
   moveMarker(event: {coords: ICoordinates}): void {
     this.currentPlace = event.coords;
   }
@@ -87,6 +82,11 @@ export class AdminComponent implements OnInit {
         order.isVisible = false;
       }
     }
+  }
+
+  toggleShowNewOrderForm(event: boolean) {
+    console.log('aa', event)
+    this.showNewOrderForm = event;
   }
 
 }

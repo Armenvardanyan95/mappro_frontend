@@ -1,6 +1,6 @@
 agm-map {
-  height: 550px;
-  width: 100%;
+  height: 100vh;
+  width: 55vw;
   float: left;
 }
 
