@@ -1,7 +1,6 @@
 agm-map {
   height: 100vh;
-  width: 55vw;
-  float: left;
+  width: 100%;
 }
 
 app-header {

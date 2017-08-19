@@ -3,5 +3,59 @@ p {
 }
 
 .inner-div {
-  margin-bottom: 0px !important;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: normal;
+  margin: 6px 15px;
+ 
 }
+.order-name{
+	cursor: pointer !important;
+	font-size: 18px;
+	font-weight: normal;
+	margin: 8px 6px;
+}
+/* .order-view-div:nth-child(2n+0) {
+    background: blue;
+}
+
+.order-view-div:nth-child(2n+0) {
+    background: red;
+} */
+/*.order-view-div{
+	margin: 0 0 0 1069px;
+}*/
+.marker-view{
+
+}
+.icon-right{
+	margin-right: 15px;	
+}
+.mat-list-item{
+	font-size: 13px !important;
+	height: 27px !important;
+	border-bottom: 1px solid #ddd;
+}
+.order-view-div{
+	border-top: 2px solid #ccc;
+	border-bottom: 1px solid #ddd;
+}
+.comment-order{
+	padding-bottom: 5px !important;
+}
+
+.order-name img{
+	margin:0 5px;
+}
+
+.inner-div img{
+	margin: 0 15px;
+}
+
+.mat-list-item-content{
+	overflow: scroll !important;
+}
+.mat-input-infix{
+	padding: 0 !important;
+}
+

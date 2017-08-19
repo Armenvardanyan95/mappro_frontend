@@ -1,3 +1,51 @@
 button {
   color: black;
 }
+.footer{
+	background: #000 !important;
+	position: fixed;
+	bottom: 0;
+	width: 70.1%;
+	max-height: 20px !important;
+}
+.footer-button{
+	background: #ddd;
+	border-radius: 0px;
+	position: absolute;
+	bottom: 4px;
+
+}
+.footer-button:hover{
+	background: #fff;
+}
+ .users-button{
+	right: 3px;
+} 
+.new-user{
+	left: 3px;
+}
+.footer-button{
+	border-radius: 0px !important;
+	  height:29px !important;
+	  top: 3px;
+	  line-height: 29px;
+}
+@media screen and (max-width: 945px) {
+    .footer{
+		width: 60.1% !important;
+	}
+}
+@media screen and (max-width: 630px) {
+    .footer{
+		width: 40.1% !important;
+	}
+}
+@media screen and (max-width: 527px) {
+    .footer-button{
+	  height:29px !important;
+	  padding: 1px !important;
+	  min-width: 56px !important;
+	  top: 3px;
+	  line-height: 29px;
+}
+}

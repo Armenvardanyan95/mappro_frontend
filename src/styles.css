@@ -1,1 +1,47 @@
+													/* Mapp Sitebar Start */
+.mat-card{
+	padding: 0px !important;
+}
+
+.card-with-map{
+	width:79.2% !important;
+	margin-right: 10px;
+}
+.mat-list{
+	padding: 0 !important;
+	margin-top: 34px !important;
+}
+
+
+
+
+													/* Mapp Sitebar End */
+
+
+
+													/*Order Edit Satrt*/
+
+.mat-list .mat-list-item .mat-list-item-content, .mat-nav-list .mat-list-item .mat-list-item-content{
+	height: 30px !important;
+}
+												/*Order Edit End*/
+.mat-toolbar{
+	min-height: 35px !important;
+	padding:0 3px !important;
+}
+
+.card-with-map{
+		width: 70% !important;
+	}
+
+@media screen and (max-width: 945px) {
+    .card-with-map{
+		width: 60% !important;
+	}
+}
+@media screen and (max-width: 630px) {
+    .card-with-map{
+		width: 40% !important;
+	}
+}
 /* You can add global styles to this file, and also import other style files */

@@ -1,16 +1,16 @@
-<div (dblclick)="openEditDialog()" (click)="showDetails()">
-  <h4>{{ order.name + ': ' + order.id}} </h4>
-  <h6 class="inner-div">{{ order.address }}</h6>
+<div class="order-view-div" (dblclick)="openEditDialog()" (click)="showDetails()">
+  <h4 class="order-name"><img class="icon-right" class="marker-view" src="marker.png" alt="marker"> {{ order.name + ': ' + order.id}}</h4>
+  <h6 class="inner-div"><img class="icon-right" src="home.png" alt="Adress">{{ order.address }}</h6>
 </div>
 <ng-container *ngIf="order.isVisible">
     <md-list (dblclick)="openEditDialog()">
-      <md-list-item *ngIf="order.mobilePhone">{{ order.mobilePhone }}</md-list-item>
-      <md-list-item *ngIf="order.problem">{{ order.problem }}</md-list-item>
-      <md-list-item *ngIf="order.date || order.timeFrom || order.timeTo">
+      <md-list-item *ngIf="order.mobilePhone"><img class="icon-right" src="phone.png" alt="Mob."> {{ order.mobilePhone }}</md-list-item>
+      <md-list-item *ngIf="order.problem"><img class="icon-right" src="alert.png" alt="Problem">{{ order.problem }}</md-list-item>
+      <md-list-item *ngIf="order.date || order.timeFrom || order.timeTo"><img class="icon-right" src="date.png" alt="Data">
         {{ order.date | date }} {{ order.timeFrom ? order.timeFrom : '' }}{{ order.timeTo ? (' - ' + order.timeTo) : '' }}
       </md-list-item>
-      <md-list-item>{{ order.userDetails.firstName + ' ' + order.userDetails.lastName }}</md-list-item>
-      <md-list-item *ngIf="order.comment">{{ order.comment }}</md-list-item>
+      <md-list-item><img class="icon-right" src="client.png" alt="User">{{ order.userDetails.firstName + ' ' + order.userDetails.lastName }}</md-list-item>
+      <md-list-item class="comment-order" *ngIf="order.comment"><img class="icon-right" src="comment.png" alt="Comment">{{ order.comment }}</md-list-item>
     </md-list>
 </ng-container>
 

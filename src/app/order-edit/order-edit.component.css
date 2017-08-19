@@ -1,0 +1,12 @@
+.marker-color-modal, .user-modal{
+	margin: 25px 0 !important;
+}
+
+.marker-color-modal{
+	width: 120px !important;
+}
+
+.problem-modal{
+	width: 190px;
+	height: 60px;
+}

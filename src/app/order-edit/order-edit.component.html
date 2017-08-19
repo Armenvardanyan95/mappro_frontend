@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+<form class="form-modal" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
 
   <app-form-control [control]="form.controls['name']" [placeholder]="'Name'" [submitted]="submitted"></app-form-control>
 
@@ -26,7 +26,7 @@
 
   <div>
     <md-input-container>
-      <textarea formControlName="problem" mdInput placeholder="Problem" rows="6" cols="35"></textarea>
+      <textarea class="problem-modal" formControlName="problem" mdInput placeholder="Problem" rows="6" cols="35"></textarea>
     </md-input-container>
     <div *ngIf="form.controls['problem'].errors">
       <md-error *ngIf="form.controls['problem'].errors.required && (form.controls['problem'].touched || submitted)">
@@ -36,7 +36,7 @@
   </div>
 
   <div>
-    <md-select placeholder="Marker Color" formControlName="colorMarker">
+    <md-select class="marker-color-modal" placeholder="Marker Color" formControlName="colorMarker">
       <md-option *ngFor="let color of colors" [value]="color.id" [style.background]="color.color">
         {{ color.name }}
       </md-option>
@@ -80,7 +80,7 @@
   </div>
 
   <div>
-    <md-select placeholder="User" formControlName="user">
+    <md-select class="user-modal" placeholder="User" formControlName="user">
       <md-option *ngFor="let user of users" [value]="user.id">
         {{ user.firstName + ' ' + user.lastName }}
       </md-option>
