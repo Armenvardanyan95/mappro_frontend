@@ -23,6 +23,7 @@ export class AdminComponent implements OnInit {
   public colors: Array<IColorMarker>;
   public orders: Array<IOrder> = [];
   public currentPlace: ICoordinates;
+  public zoom: number = 8;
 
   users: Array<IUser>;
   title: string = 'My first AGM project';
@@ -62,13 +63,10 @@ export class AdminComponent implements OnInit {
       .map((order: IOrder) => {
         order.isVisible = false;
         const removeTrailingZeros = (time: string) => time.split(':').slice(0, 2).join(':');
-        console.log(order.timeFrom)
         order.timeTo = removeTrailingZeros(order.timeTo);
-        console.log(order.timeFrom)
         order.timeFrom = removeTrailingZeros(order.timeFrom);
         return order;
       })
-      .do(console.log)
       .subscribe((order: IOrder) => this.orders.push(order));
   }
 
@@ -76,17 +74,17 @@ export class AdminComponent implements OnInit {
     this.currentPlace = event.coords;
   }
 
-  changeOrderVisibility(id: number): void {
+  changeOrderVisibility(orderInstance: IOrder): void {
     for (const order of this.orders) {
-      if (order.isVisible && order.id !== id) {
+      if (order.isVisible && order.id !== orderInstance.id) {
         order.isVisible = false;
       }
     }
+    this.moveMarker({coords: {lat: orderInstance.lat, lng: orderInstance.lng}});
+    this.zoom = 16;
   }
 
   toggleShowNewOrderForm(event: boolean) {
-    console.log('aa', event)
     this.showNewOrderForm = event;
   }
-
 }

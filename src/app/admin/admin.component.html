@@ -1,15 +1,15 @@
 <app-header (showNewOrderFormChange)="toggleShowNewOrderForm($event)" [colors]="colors"></app-header>
 
 <md-card class="card-with-map">
-  <agm-map
+  <agm-map [zoom]="zoom"
     [latitude]="currentPlace ? currentPlace.lat : lat" [longitude]="currentPlace ? currentPlace.lng : lng"
     (mapDblClick)="moveMarker($event)">
 
     <agm-marker *ngIf="currentPlace" [latitude]="currentPlace.lat"
                 [longitude]="currentPlace.lng"></agm-marker>
 
-    <agm-marker *ngFor="let order of orders" [latitude]="order.lat"
-                [longitude]="order.lng" label="{{ order.id }}" ></agm-marker>
+    <agm-marker *ngFor="let order of orders" [latitude]="order.lat" [iconUrl]="order.colorMarkerDetails.image"
+                [longitude]="order.lng" label="{{ order.id }}" (markerClick)="changeOrderVisibility(order); order.isVisible = true"></agm-marker>
   </agm-map>
 
 </md-card>

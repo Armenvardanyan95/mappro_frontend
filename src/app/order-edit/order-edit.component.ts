@@ -45,7 +45,7 @@ export class OrderEditComponent implements OnInit {
       timeTo: ['', []],
       problem: ['', []],
       comment: ['', []],
-      color: [''],
+      colorMarker: [''],
       user: ['']
     });
   }

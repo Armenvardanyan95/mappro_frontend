@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { MdSnackBar } from '@angular/material';
 
@@ -14,6 +14,7 @@ export class ColorMarkerComponent implements OnInit {
   public form: FormGroup;
   public submitted: boolean = false;
   public color: string = "#127bdc";
+  public colorCreated: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private colorMarkerService: ColorMarkerService,
               private snackbar: MdSnackBar) {
@@ -35,8 +36,11 @@ export class ColorMarkerComponent implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
       this.colorMarkerService.create(values).subscribe(
-        res => this.snackbar.open('Succesfully created a new color', 'OK'),
-        err => this.snackbar.open('Something went wrong', 'OK')
+        () => {
+          this.colorCreated.emit(true);
+          this.snackbar.open('Succesfully created a new color', 'OK')
+        },
+            err => this.snackbar.open('Something went wrong', 'OK')
       );
     }
   }

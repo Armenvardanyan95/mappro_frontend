@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import {HttpModule} from "@angular/http";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
+import { CalendarModule } from 'angular-calendar';
 
 import {MdInputModule, MdToolbarModule, MdButtonModule, MdDatepickerModule,
   MdNativeDateModule, MdCardModule, MdDialogModule, MdSnackBarModule, MdSnackBar,
@@ -30,12 +31,14 @@ import {MdMultiselect} from "md-multiselect";
 import {OrderService} from "./common/services/order.service";
 import { OrderEditComponent } from './order-edit/order-edit.component';
 import { OrderViewComponent } from './order-view/order-view.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard]}
+  {path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AdminComponent, pathMatch: 'full', canActivate: [AuthGuard]}
 ];
 
 
@@ -52,7 +55,8 @@ const routes: Routes = [
     ColorMarkerComponent,
     MdMultiselect,
     OrderEditComponent,
-    OrderViewComponent
+    OrderViewComponent,
+    CalendarComponent
   ],
   entryComponents: [UserProfileComponent, UserListComponent, ColorMarkerComponent, OrderEditComponent],
   imports: [
@@ -73,6 +77,7 @@ const routes: Routes = [
     MdCardModule,
     MdListModule,
     ColorPickerModule,
+    CalendarModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: environment.googleMapsApiKey
     }),

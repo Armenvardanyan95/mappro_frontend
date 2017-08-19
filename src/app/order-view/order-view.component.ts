@@ -15,7 +15,7 @@ export class OrderViewComponent implements OnInit {
   @Input() order: IOrder;
   @Input() users: IUser[];
   @Input() colors: IColorMarker[];
-  @Output() orderMadeVisible: EventEmitter<number> = new EventEmitter();
+  @Output() orderMadeVisible: EventEmitter<IOrder> = new EventEmitter();
 
   constructor(private dialog: MdDialog) { }
 
@@ -38,7 +38,7 @@ export class OrderViewComponent implements OnInit {
 
   showDetails(): void {
     this.order.isVisible = !this.order.isVisible;
-    this.orderMadeVisible.emit(this.order.id);
+    this.orderMadeVisible.emit(this.order);
   }
 
 }

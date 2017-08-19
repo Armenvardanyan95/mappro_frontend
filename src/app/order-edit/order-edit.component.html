@@ -36,8 +36,8 @@
   </div>
 
   <div>
-    <md-select placeholder="Marker Color" formControlName="color">
-      <md-option *ngFor="let color of colors" [value]="color.color" [style.background]="color.color">
+    <md-select placeholder="Marker Color" formControlName="colorMarker">
+      <md-option *ngFor="let color of colors" [value]="color.id" [style.background]="color.color">
         {{ color.name }}
       </md-option>
     </md-select>

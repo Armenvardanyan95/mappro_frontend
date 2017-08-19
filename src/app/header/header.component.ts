@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
 
   openNewColorDialog(): void {
     const dialog = this.dialog.open(ColorMarkerComponent);
+    dialog.componentInstance.colorCreated.subscribe(() => dialog.close());
   }
 
 }

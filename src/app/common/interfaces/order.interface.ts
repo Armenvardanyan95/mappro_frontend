@@ -15,5 +15,6 @@ interface IOrder {
   lng: number;
   isVisible: boolean;
   color: string;
+  colorMarkerDetails: {image: string};
   currentPlace?: {lat: number, lng: number};
 }
