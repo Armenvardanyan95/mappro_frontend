@@ -1,11 +1,12 @@
-<md-toolbar color="primary">
+<md-toolbar class="fixed-header" color="primary">
+  <button class="new-color" (click)="openNewColorDialog()" md-raised-button>New Color</button>
+  <img class="marker-header"  *ngFor="let color of colors" style="width: 30px; height: 30px;" src="http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png" />
 
-  <img  *ngFor="let color of colors" style="width: 30px; height: 30px;" src="http://www.clker.com/cliparts/e/3/F/I/0/A/google-maps-marker-for-residencelamontagne-hi.png" />
-  <button (click)="openNewColorDialog()" md-raised-button>New Color</button>
-
-  <div class="float-right">
-    <button (click)="toggleShowNewOrderForm()" md-raised-button>New Order</button>
-    <button md-raised-button type="submit">Logout</button>
+  <div class="header-right-block">
+    <button (click)="toggleShowNewOrderForm()" md-raised-button class="new-order-btn">New Order</button>
+    <button md-raised-button type="submit" class="log-out">
+    	<img src="https://scontent-frx5-1.xx.fbcdn.net/v/t34.0-12/20938844_1421538617923543_1774196179_n.png?oh=1b3664cb331e72e4494f1cc02e491f4b&oe=59999342" alt="Log Out" width="30" height="30">
+    </button>
   </div>
 
 </md-toolbar>

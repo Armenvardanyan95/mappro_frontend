@@ -1,15 +1,60 @@
 .fill-remaining-space {
   flex: 1 1 auto;
 }
-
 md-toolbar {
   width: 100% !important;
+  height: 12px;
 }
-
 button {
   color: black;
 }
+.header-right-block {
+  position: absolute;
+  right: 5.1em;
+  top: 2px;
+}
+.header-right-block button:hover{
+  background: #fff;
+}
+.header-right-block button{
+	border-radius: 0px !important;
+  height: 31px !important;
+  top: -4px;
+}
+.new-order-btn, .mat-raised-button{
+  height: 40px;
+  background: #ddd;
+}
+.log-out{
+  min-width: 55px !important;	
+  right: -7em;
+  background: transparent !important;
+  padding:0 0 0 12px !important;
+}
+.log-out img{
 
-.float-right {
-  float: right;
+}
+.new-order-btn{
+  left: 0em;
+  top: 0em !important;
+  position: absolute;
+}
+.mat-toolbar.mat-primary{
+	background: #000 !important;
+}
+.mat-raised-button{
+	border-radius: 0px !important;
+}
+.mat-raised-button:hover{
+  background: #fff;
+}
+.new-color{
+  margin: -30px 20px 0 0;
+  height: 31px;
+  line-height: 5px !important;
+}
+.fixed-header{
+  z-index: 999999;
+  position: fixed !important;
+  top: 0 !important;     
 }

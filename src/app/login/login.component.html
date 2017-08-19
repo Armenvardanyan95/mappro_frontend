@@ -1,7 +1,7 @@
-<form (ngSubmit)="onSubmit(form.value)" style="height: 100%;">
+<form class="login-form" (ngSubmit)="onSubmit(form.value)" style="height: 100%;">
 
-  <md-card>
-    <md-card-header>Login</md-card-header>
+  <md-card class="login-main-div">
+    <md-card-header class="login-div">Login</md-card-header>
 
     <app-form-control [control]="form.controls['username']" [submitted]="submitted" [placeholder]="'Username'">
     </app-form-control>
@@ -10,7 +10,7 @@
                       [isPassword]="true"></app-form-control>
 
     <div>
-      <button type="submit" md-raised-button> Log in </button>
+      <button class="login-btn" type="submit" md-raised-button> Log in </button>
     </div>
 
   </md-card>
