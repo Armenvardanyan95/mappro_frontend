@@ -43,6 +43,8 @@ export class OrderEditComponent implements OnInit {
       date: ['', []],
       timeFrom: ['', []],
       timeTo: ['', []],
+      lat: [''],
+      lng: [''],
       problem: ['', []],
       comment: ['', []],
       colorMarker: [''],
@@ -107,7 +109,11 @@ export class OrderEditComponent implements OnInit {
 
   selectPlace(place: ILocation): void {
     this.googleMapsService.getLocationById(place.place_id)
-      .subscribe((res: ILocationSearchResults) => this.currentPlace = res.results[0].geometry.location);
+      .subscribe((res: ILocationSearchResults) => {
+        this.currentPlace = res.results[0].geometry.location;
+        this.form.controls['lat'].setValue(this.currentPlace.lat);
+        this.form.controls['lng'].setValue(this.currentPlace.lng);
+      });
   }
 
   onSubmit(values: IOrder){
@@ -115,8 +121,6 @@ export class OrderEditComponent implements OnInit {
     console.log(values);
     if(this.form.valid){
       const order: IOrder = values;
-      order.lat = this.currentPlace.lat;
-      order.lng = this.currentPlace.lng;
       if (this.order) {
         this.updateOrder(order);
       } else {

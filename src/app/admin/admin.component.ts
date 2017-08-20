@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormGroup, FormBuilder} from '@angular/forms';
 import {MdDialog, MdSnackBar} from '@angular/material';
+import { MarkerManager, AgmMarker } from '@agm/core';
 
 import {UserService, ColorMarkerService, GoogleMapsService, OrderService} from "app/common/services";
 import {ColorMarkerComponent} from "../color-marker/color-marker.component";
+import {Marker} from "@agm/core/services/google-maps-types";
 
 
 
@@ -23,6 +25,7 @@ export class AdminComponent implements OnInit {
   public colors: Array<IColorMarker>;
   public orders: Array<IOrder> = [];
   public currentPlace: ICoordinates;
+  public markerCoordinates: ICoordinates;
   public zoom: number = 8;
 
   users: Array<IUser>;
@@ -32,7 +35,7 @@ export class AdminComponent implements OnInit {
 
   constructor(private userService: UserService, private formBuilder: FormBuilder, private colorMarkerService: ColorMarkerService,
               private googleMapsService: GoogleMapsService, private orderService: OrderService,
-              private snackBar: MdSnackBar) {
+              private snackBar: MdSnackBar, private markerManager: MarkerManager) {
   }
 
   ngOnInit() {
@@ -57,11 +60,16 @@ export class AdminComponent implements OnInit {
     this.colorMarkerService.all().subscribe((res: Array<IColorMarker>) => this.colors = res);
   }
 
+  get selectedOrderIds(): number[] {
+    return this.orders.filter((order: IOrder) => order.isSelected).map((order: IOrder) => order.id);
+  }
+
   public getOrders(): void {
     this.orderService.getAll()
       .switchMap(res => res)
       .map((order: IOrder) => {
         order.isVisible = false;
+        order.isSelected = false;
         const removeTrailingZeros = (time: string) => time.split(':').slice(0, 2).join(':');
         order.timeTo = removeTrailingZeros(order.timeTo);
         order.timeFrom = removeTrailingZeros(order.timeFrom);
@@ -70,18 +78,35 @@ export class AdminComponent implements OnInit {
       .subscribe((order: IOrder) => this.orders.push(order));
   }
 
-  moveMarker(event: {coords: ICoordinates}): void {
-    this.currentPlace = event.coords;
+  setMarker(event: {coords: ICoordinates}): void {
+    this.zoomTo(event.coords);
+    this.markerCoordinates = event.coords;
   }
 
-  changeOrderVisibility(orderInstance: IOrder): void {
+  zoomTo(orderInstance: ICoordinates): void {
+    this.currentPlace = {lat: orderInstance.lat, lng: orderInstance.lng};
+  }
+
+  setMarkerTitle(markerRef: AgmMarker): void {
+    // this.markerManager.updateLabel(markerRef).then(console.log);
+    // this.markerManager.getNativeMarker(markerRef).then(
+    //   (marker: Marker) => {
+    //     console.log(marker, 'aaaa')
+    //   }
+    // );
+  }
+
+  changeOrderVisibility(orderInstance: IOrder, markerRef?: AgmMarker): void {
+    if (markerRef) {
+      this.setMarkerTitle(markerRef);
+    }
     for (const order of this.orders) {
       if (order.isVisible && order.id !== orderInstance.id) {
         order.isVisible = false;
       }
     }
-    this.moveMarker({coords: {lat: orderInstance.lat, lng: orderInstance.lng}});
     this.zoom = 16;
+    this.zoomTo(orderInstance);
   }
 
   toggleShowNewOrderForm(event: boolean) {

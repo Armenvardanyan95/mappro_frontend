@@ -28,4 +28,8 @@ export class OrderService {
     return this.http.get(this.baseUrl, this.makeRequestOptions).map(res => res.json());
   }
 
+  archive(orderIds: number[]): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/archive/', orderIds);
+  }
+
 }

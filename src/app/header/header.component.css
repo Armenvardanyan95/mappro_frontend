@@ -26,7 +26,7 @@ button {
   background: #ddd;
 }
 .log-out{
-  min-width: 55px !important;	
+  min-width: 55px !important;
   right: -7em;
   background: transparent !important;
   padding:0 0 0 12px !important;
@@ -56,5 +56,7 @@ button {
 .fixed-header{
   z-index: 999999;
   position: fixed !important;
-  top: 0 !important;     
+  top: 0 !important;
 }
+
+

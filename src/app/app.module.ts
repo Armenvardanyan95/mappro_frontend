@@ -8,11 +8,10 @@ import { CalendarModule } from 'angular-calendar';
 
 import {MdInputModule, MdToolbarModule, MdButtonModule, MdDatepickerModule,
   MdNativeDateModule, MdCardModule, MdDialogModule, MdSnackBarModule, MdSnackBar,
-  MdSelectModule, MdAutocompleteModule, MdListModule} from '@angular/material';
-import { AgmCoreModule } from '@agm/core';
+  MdSelectModule, MdAutocompleteModule, MdListModule, MdIconModule, MdCheckboxModule} from '@angular/material';
+import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import {ColorPickerModule} from 'angular4-color-picker';
-
 import { AppComponent } from './app.component';
 import {UserService} from "./common/services/user.service";
 import { AdminComponent } from './admin/admin.component';
@@ -40,7 +39,6 @@ const routes: Routes = [
   {path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard]},
   {path: 'admin', component: AdminComponent, pathMatch: 'full', canActivate: [AuthGuard]}
 ];
-
 
 @NgModule({
   declarations: [
@@ -71,10 +69,12 @@ const routes: Routes = [
     MdNativeDateModule,
     MdDatepickerModule,
     MdDialogModule,
+    MdIconModule,
     MdSelectModule,
     MdSnackBarModule,
     MdAutocompleteModule,
     MdCardModule,
+    MdCheckboxModule,
     MdListModule,
     ColorPickerModule,
     CalendarModule.forRoot(),
@@ -87,7 +87,7 @@ const routes: Routes = [
     }),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService, MdSnackBar, AuthGuard, ColorMarkerService, GoogleMapsService, OrderService],
+  providers: [UserService, MdSnackBar, AuthGuard, ColorMarkerService, GoogleMapsService, OrderService, MarkerManager, GoogleMapsAPIWrapper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

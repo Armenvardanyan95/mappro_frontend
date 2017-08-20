@@ -1,16 +1,38 @@
 <div class="order-view-div" (dblclick)="openEditDialog()" (click)="showDetails()">
-  <h4 class="order-name"><img class="icon-right" class="marker-view" src="marker.png" alt="marker"> {{ order.name + ': ' + order.id}}</h4>
-  <h6 class="inner-div"><img class="icon-right" src="home.png" alt="Adress">{{ order.address }}</h6>
+  <div class="order-name" color="primary">
+    <md-checkbox [(ngModel)]="order.isSelected"></md-checkbox>
+    <div class="image-marker rwgerg-parent">
+      <img class="icon-right small marker-view" [src]="order.colorMarkerDetails.image" alt="marker">
+      <span class="h2-marker">{{ order.id }}</span>
+    </div>
+    <div class="rwgerg">{{ order.name }}</div>
+  </div>
+  <h6 class="inner-div">
+    <md-icon class="address-icon">home</md-icon>
+    {{ order.address }}
+  </h6>
 </div>
 <ng-container *ngIf="order.isVisible">
-    <md-list (dblclick)="openEditDialog()">
-      <md-list-item *ngIf="order.mobilePhone"><img class="icon-right" src="phone.png" alt="Mob."> {{ order.mobilePhone }}</md-list-item>
-      <md-list-item *ngIf="order.problem"><img class="icon-right" src="alert.png" alt="Problem">{{ order.problem }}</md-list-item>
-      <md-list-item *ngIf="order.date || order.timeFrom || order.timeTo"><img class="icon-right" src="date.png" alt="Data">
+    <md-list class="only-this-margin" (dblclick)="openEditDialog()">
+      <div class="comment-order" *ngIf="order.mobilePhone">
+        <md-icon>phone</md-icon> {{ order.mobilePhone }}
+      </div>
+      <div class="comment-order" *ngIf="order.problem">
+        <md-icon>warning</md-icon>
+        {{ order.problem }}
+      </div>
+      <div class="comment-order" *ngIf="order.date || order.timeFrom || order.timeTo">
+        <md-icon>update</md-icon>
         {{ order.date | date }} {{ order.timeFrom ? order.timeFrom : '' }}{{ order.timeTo ? (' - ' + order.timeTo) : '' }}
-      </md-list-item>
-      <md-list-item><img class="icon-right" src="client.png" alt="User">{{ order.userDetails.firstName + ' ' + order.userDetails.lastName }}</md-list-item>
-      <md-list-item class="comment-order" *ngIf="order.comment"><img class="icon-right" src="comment.png" alt="Comment">{{ order.comment }}</md-list-item>
+      </div>
+      <div class="comment-order">
+        <md-icon>person pin</md-icon>
+        {{ order.userDetails.firstName + ' ' + order.userDetails.lastName }}
+      </div>
+      <div class="comment-order" *ngIf="order.comment">
+       <md-icon>comment</md-icon>
+        {{ order.comment }}
+      </div>
     </md-list>
 </ng-container>
 

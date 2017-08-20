@@ -6,14 +6,14 @@ p {
   cursor: pointer;
   font-size: 13px;
   font-weight: normal;
-  margin: 6px 15px;
- 
+  margin: 6px 0px;
+
 }
 .order-name{
 	cursor: pointer !important;
 	font-size: 18px;
 	font-weight: normal;
-	margin: 8px 6px;
+	margin: 0px 6px;
 }
 /* .order-view-div:nth-child(2n+0) {
     background: blue;
@@ -29,7 +29,7 @@ p {
 
 }
 .icon-right{
-	margin-right: 15px;	
+	margin-right: 15px;
 }
 .mat-list-item{
 	font-size: 13px !important;
@@ -41,7 +41,22 @@ p {
 	border-bottom: 1px solid #ddd;
 }
 .comment-order{
-	padding-bottom: 5px !important;
+	padding-bottom: 8px !important;
+  border-bottom: 1px solid #ddd;
+}
+
+.rwgerg {
+  display: inline-block !important;
+  vertical-align: 15px !important;
+}
+
+.rwgerg-parent {
+  display: inline !important;
+  width: 8% !important;
+}
+
+.only-this-margin {
+  margin-top: 8px !important;
 }
 
 .order-name img{
@@ -50,6 +65,7 @@ p {
 
 .inner-div img{
 	margin: 0 15px;
+  vertical-align: -7px;
 }
 
 .mat-list-item-content{
@@ -59,3 +75,32 @@ p {
 	padding: 0 !important;
 }
 
+/*.only-this-margin {*/
+  /*width: 10px;*/
+  /*height: 10px;*/
+/*}*/
+.address-icon {
+  vertical-align: -5px !important;
+}
+
+.image-marker {
+  position: relative;
+  width: 100%; /* for IE 6 */
+}
+
+.h2-marker {
+  position: absolute;
+  top: -15px;
+  left: 11px;
+  height: 13px;
+  width: 6px;
+  background: #fff;
+  padding: 2px;
+  color: #000000;
+  border-radius: 23%;
+  font-size: 14px;
+}
+
+h6 {
+  margin: 0 !important;
+}

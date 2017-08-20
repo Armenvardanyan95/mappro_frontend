@@ -8,7 +8,9 @@ app-login {
 }
 .login-form::before{
 	content: '';
-	background-image: url(newyrk.jpg);
+	background-image: url(../../assets/newyrk.jpg);
+  background-repeat: no-repeat;
+  background-size:cover;
 	position: absolute;
 	left: 0;
 	top: 0;

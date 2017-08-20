@@ -14,7 +14,7 @@ export class ColorMarkerComponent implements OnInit {
   public form: FormGroup;
   public submitted: boolean = false;
   public color: string = "#127bdc";
-  public colorCreated: EventEmitter<boolean> = new EventEmitter();
+  public colorCreated: EventEmitter<IColorMarker> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private colorMarkerService: ColorMarkerService,
               private snackbar: MdSnackBar) {
@@ -36,8 +36,8 @@ export class ColorMarkerComponent implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
       this.colorMarkerService.create(values).subscribe(
-        () => {
-          this.colorCreated.emit(true);
+        (color: IColorMarker) => {
+          this.colorCreated.emit(color);
           this.snackbar.open('Succesfully created a new color', 'OK')
         },
             err => this.snackbar.open('Something went wrong', 'OK')

@@ -4,6 +4,7 @@ app-header {
 
 .float-right {
   float: right !important;
+  z-index: 9 !important;
 }
 
 .forty-percent {

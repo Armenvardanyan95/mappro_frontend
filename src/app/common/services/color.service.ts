@@ -16,7 +16,7 @@ export class ColorMarkerService {
     return new RequestOptions({headers: headers});
   }
 
-  create(values: IColorMarker): Observable<any> {
+  create(values: IColorMarker): Observable<IColorMarker> {
     return this.http.post(this.baseUrl, values, this.makeRequestOptions).map((res: Response) => res.json());
   }
 

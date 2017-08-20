@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MdDialog, MdSnackBar} from '@angular/material';
 
 import {ColorMarkerComponent} from  'app/color-marker/color-marker.component';
+import {OrderService} from 'app/common/services';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +12,12 @@ import {ColorMarkerComponent} from  'app/color-marker/color-marker.component';
 export class HeaderComponent implements OnInit {
 
   @Input() colors: IColorMarker[];
+  @Input() orderIds: number[];
   showNewOrderForm: boolean = false;
   @Output()
   showNewOrderFormChange: EventEmitter<boolean> = new EventEmitter();
-  constructor(private dialog: MdDialog) { }
+
+  constructor(private dialog: MdDialog, private orderService: OrderService, private snackBar: MdSnackBar) { }
 
   ngOnInit() {
   }
@@ -26,7 +29,17 @@ export class HeaderComponent implements OnInit {
 
   openNewColorDialog(): void {
     const dialog = this.dialog.open(ColorMarkerComponent);
-    dialog.componentInstance.colorCreated.subscribe(() => dialog.close());
+    dialog.componentInstance.colorCreated.subscribe((color: IColorMarker) => {
+      this.colors.push(color);
+      dialog.close()
+    });
+  }
+
+  archive() {
+    this.orderService.archive(this.orderIds)
+      .subscribe(
+        () => this.snackBar.open('Orders were succesfully archivated', 'OK')
+      );
   }
 
 }
