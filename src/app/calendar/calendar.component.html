@@ -1,3 +1,18 @@
-<mwl-calendar-month-view
-  [viewDate]="viewDate">
-</mwl-calendar-month-view>
+<p-accordion [multiple]="true">
+  <p-accordionTab *ngFor="let month of months" [header]="month">
+    <p-dataTable [value]="calendar">
+      <p-column field="time" header="Time">
+        <ng-template pTemplate let-day="rowData">
+          <div>{{ day.time.time }}<sup>{{day.time.type}}</sup></div>
+        </ng-template>
+      </p-column>
+
+      <p-column *ngFor="let d of days" [field]="d" [header]="d">
+        <ng-template pTemplate let-day="rowData">
+          <div class="order-cell">DEVBIL vochxar anasun ezz tavar</div>
+          <div class="order-cell" *ngIf="d == 11 && day.time.time == '11:30'">DEVBIL vochxar anasun ezz tavar AvVELI SHAT</div>
+        </ng-template>
+      </p-column>
+    </p-dataTable>
+  </p-accordionTab>
+</p-accordion>

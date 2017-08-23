@@ -29,3 +29,20 @@ export const TIME_VALUES: ITime[] = [
   {time: '7:30', type: 'pm'},
   {time: '8:00', type: 'pm'},
 ];
+
+export const MONTHS: string[] = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+export const DAYS = Array.apply(null, Array(31)).map((item: any, index: number) => ++index);

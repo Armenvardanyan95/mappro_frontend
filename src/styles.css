@@ -47,3 +47,23 @@
 /* You can add global styles to this file, and also import other style files */
 
 
+.ui-datatable {
+  overflow-x: scroll !important;
+  max-width: 3000px !important;
+  min-width: 3000px !important;
+}
+
+.ui-datatable td {
+  display: block;
+  min-width: 100px !important;
+}
+
+.ui-datatable th {
+  display: block;
+  min-width: 100px !important;
+}
+
+
+.ui-cell-data {
+  min-width: 100px !important;
+}
