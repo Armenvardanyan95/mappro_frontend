@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Response} from "@angular/http";
-import {MdSnackBar, MdSnackBarConfig} from '@angular/material';
+import {MdSnackBar, MdSnackBarConfig, MdDialog, MdDialogRef} from '@angular/material';
 
 import {UserService} from 'app/common/services';
 import {PasswordValidator} from 'app/common/validators';
+import {UserDeleteComponent} from "../user-delete/user-delete.component";
 
 @Component({
   selector: 'app-user-profile',
@@ -15,35 +16,76 @@ export class UserProfileComponent implements OnInit {
 
   public form: FormGroup;
   public submitted: boolean = false;
+  @Input() user: IUser;
+  @Output() public userCreated: EventEmitter<IUser> = new EventEmitter();
+  @Output() public userDeleted: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private snackBar: MdSnackBar) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService,
+              private snackBar: MdSnackBar, private dialog: MdDialog) {
     this.form = formBuilder.group({
+      'id': [''],
       'firstName': ['', Validators.required],
       'lastName': ['', Validators.required],
       'username': ['', Validators.required],
       'email': ['', [Validators.required, Validators.email]],
       'password': ['', Validators.required],
       'confirmPassword': ['', Validators.required]
-    }, PasswordValidator.validate('password', 'confirmPassword'));
+    }, {validator: PasswordValidator.validate('password', 'confirmPassword')});
   }
 
   ngOnInit() {
+    if (this.user) {
+      this.form.patchValue(this.user);
+      this.form.controls['password'].clearValidators();
+      this.form.controls['password'].patchValue('');
+      this.form.controls['confirmPassword'].clearValidators();
+    }
   }
 
   onSubmit(values: IUser): void {
     this.submitted = true;
     if (this.form.valid) {
-      this.userService.create(values).subscribe(
-        res => this.snackBar.open('User Successfully created', 'OK', <MdSnackBarConfig>{duration: 3000}),
-        (err: Response) => {
-          const errors = err.json();
-          for (const msg in errors) {
-            if (errors.hasOwnProperty(msg)) {
-              this.snackBar.open(errors[msg], 'OK', <MdSnackBarConfig>{duration: 3000});
-            }
-          }
-        }
-      );
+      if (this.user) {
+        return this.updateUser(values);
+      }
+      this.createUser(values);
+    }
+  }
+
+  createUser(values: IUser): void {
+    this.userService.create(values).subscribe(
+      (res: IUser)=> this.success(res, 'created'),
+      (err: Response) => this.error(err)
+    );
+  }
+
+  updateUser(values: IUser): void {
+    this.userService.update(values).subscribe(
+      (res: IUser)=> this.success(res, 'updated'),
+      (err: Response) => this.error(err)
+    )
+  }
+
+  deleteUser() {
+    const dialog: MdDialogRef<UserDeleteComponent> = this.dialog.open(UserDeleteComponent);
+    dialog.componentInstance.users = [this.user.id];
+    dialog.componentInstance.userDeleted.subscribe(() => {
+      dialog.close();
+      this.userDeleted.emit(true);
+    });
+    dialog.componentInstance.dialogClosed.subscribe(() => dialog.close());
+  }
+
+  private success(user: IUser, action: string): void {
+    this.userCreated.emit(user);
+  }
+
+  private error(err: Response): void {
+    const errors = err.json();
+    for (const msg in errors) {
+      if (errors.hasOwnProperty(msg)) {
+        this.snackBar.open(errors[msg], 'OK', <MdSnackBarConfig>{duration: 3000});
+      }
     }
   }
 

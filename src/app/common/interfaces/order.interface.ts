@@ -3,8 +3,9 @@ interface IOrder {
   name: string;
   address: string;
   mobilePhone: string;
+  mobilePhones: string[];
   dateX: Date;
-  date: string;
+  date: any;
   timeFrom: string;
   timeTo: string;
   problem: string;
@@ -15,7 +16,11 @@ interface IOrder {
   lng: number;
   isVisible: boolean;
   isSelected: boolean;
+  isArchived: boolean;
   color: string;
-  colorMarkerDetails: {image: string};
+  rank: number;
+  notArchivedRank: number;
+  created: string;
+  colorMarkerDetails: {image: string, color: string, id: number};
   currentPlace?: {lat: number, lng: number};
 }

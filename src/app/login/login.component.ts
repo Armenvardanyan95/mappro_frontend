@@ -32,14 +32,15 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.form.valid) {
       this.userService.authenticate(values).subscribe(
-        (res: {token: string}) => {
+        (res: {token: string, isAdmin: boolean}) => {
           this.localStorage.set('token', res.token);
+          this.localStorage.set('isAdmin', res.isAdmin);
           this.router.navigateByUrl('admin');
         },
         (err: Response) => {
           const errors = err.json()['non_field_errors'];
           this.snackBar.open(errors[0], 'OK');
-      }
+        }
       );
     }
   }

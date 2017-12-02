@@ -2,7 +2,7 @@ interface ILocation {
   description: string;
   id: string;
   matched_substrings: Array<{length: number, offset: number}>;
-  place_id: string,
+  placeId: string,
   reference: string;
   "structured_formatting": {
     main_text: string,

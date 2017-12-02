@@ -3,4 +3,7 @@ interface IColorMarker {
   name: string;
   color: string;
   image?: string;
+  isSelected?: boolean;
+  default: boolean;
+  new: boolean;
 }

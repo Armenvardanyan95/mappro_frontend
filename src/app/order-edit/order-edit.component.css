@@ -1,12 +1,36 @@
-.marker-color-modal, .user-modal{
+.marker-color-modal, .user-modal {
 	margin: 25px 0 !important;
 }
 
-.marker-color-modal{
+.marker-color-modal {
 	width: 120px !important;
 }
 
-.problem-modal{
+.problem-modal {
 	width: 190px;
 	height: 60px;
 }
+
+.rele {
+  position: relative;
+}
+.abs {
+  position: absolute;
+  right: 0;
+  font-size:18px;
+  font-weight:bold;
+}
+
+/deep/.ui-calendar {
+  margin-bottom: 30px;
+}
+
+/deep/.ui-datepicker-trigger {
+    left: 120px !important;
+    top:0 !important;
+}
+
+      agm-map {
+        width: 95%;
+        height: 200px;
+      }

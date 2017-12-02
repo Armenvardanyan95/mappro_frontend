@@ -1,5 +1,5 @@
 agm-map {
-  height: 93vh;
+  height: 96.3vh;
   width: 100%;
 }
 
@@ -21,12 +21,20 @@ app-header {
 .scrollable {
   overflow-y: scroll;
   overflow-x: hidden;
-  min-height: 96vh;
-  max-height: 96vh;
-  padding-top: 15px !important;
+  min-height: 95.2vh;
+  max-height: 95.2vh;
+  padding-top: 45px !important;
 }
 
-
+.md-multiselect .md-multiselect-container {
+  position: relative;
+  display: block;
+  width: 70px !important;
+  float: left;
+}
+.petq {
+  float: right;
+}
 .card-with-map{
   width: 1200px;
   float: left;
@@ -38,3 +46,24 @@ app-footer {
   width: 100%;
 }
 
+/deep/.ui-multiselect {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 200px !important;
+}
+.user-select {
+  margin-left: 45px !important;
+}
+
+/deep/ .mat-toolbar-row {
+       height: 0 !important;
+       }
+
+
+.md-lav-card {
+  z-index: 1;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 15px !important;
+}

@@ -38,7 +38,6 @@ export class ColorMarkerComponent implements OnInit {
       this.colorMarkerService.create(values).subscribe(
         (color: IColorMarker) => {
           this.colorCreated.emit(color);
-          this.snackbar.open('Succesfully created a new color', 'OK')
         },
             err => this.snackbar.open('Something went wrong', 'OK')
       );

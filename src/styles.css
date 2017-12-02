@@ -9,7 +9,6 @@
 }
 .mat-list{
 	padding: 0 !important;
-	margin-top: 34px !important;
 }
 
 
@@ -48,9 +47,10 @@
 
 
 .ui-datatable {
-  overflow-x: scroll !important;
-  max-width: 3000px !important;
-  min-width: 3000px !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  overflow-y: scroll !important;
+  max-height: 100vh !important;
 }
 
 .ui-datatable td {
@@ -66,4 +66,13 @@
 
 .ui-cell-data {
   min-width: 100px !important;
+}
+
+/deep/.ui-datepicker-trigger {
+  display: none !important;
+}
+
+.md-multiselect {
+  width: 50.5% !important;
+  margin-top: 10px !important;
 }

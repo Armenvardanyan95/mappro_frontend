@@ -1,4 +1,4 @@
 <div *ngFor="let user of users">
-  <a href="">{{ user.firstName }} {{ user.lastName }}</a>
+  <a (contextmenu)="showUserDialog(user, $event)" target="_blank" (click)="navigated()" [routerLink]="['/user', user.id]">{{ user.firstName }} {{ user.lastName }}</a>
 </div>
 <div *ngIf="!users.length">No users here!</div>

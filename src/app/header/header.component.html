@@ -1,14 +1,21 @@
 <md-toolbar class="fixed-header" color="primary">
   <button class="new-color" (click)="openNewColorDialog()" md-raised-button>New Color</button>
-  <img class="new-color marker-header"  *ngFor="let color of colors" style="width: 30px; height: 30px;"
-       [src]="color.image" />
+  <img class="new-color marker-header" *ngFor="let color of colors"
+       (dblclick)="showDeleteColorDialog(color)"   style="width: 30px; height: 30px; cursor: pointer;"
+       [src]="color.image" [title]="color.name"/>
 
   <div class="header-right-block">
     <button (click)="toggleShowNewOrderForm()" md-raised-button class="new-order-btn">New Order</button>
-    <button (click)="archive()" md-raised-button class="new-order-btn">Archive</button>
-    <button md-raised-button type="submit" class="log-out">
+    <button (click)="archive()" md-raised-button class="new-order-btn archive-button">Archive</button>
+    <button md-raised-button type="button" (click)="logout()" class="log-out">
     	<img src="../../assets/logout.png" alt="Log Out" width="30" height="30">
     </button>
   </div>
+  <div class="calendar-div">
+    <a [routerLink]="['/calendar']" target="_blank">Calendar</a>
+  </div>
 
+  <div class="calendar-div2">
+    <a [routerLink]="['/table']" target="_blank">Table</a>
+  </div>
 </md-toolbar>

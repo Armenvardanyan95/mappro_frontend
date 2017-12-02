@@ -45,4 +45,13 @@ export const MONTHS: string[] = [
   'December'
 ];
 
-export const DAYS = Array.apply(null, Array(31)).map((item: any, index: number) => ++index);
+export const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+export const CALENDAR_SETTINGS = {
+  "firstDayOfWeek": 1,
+  "dayNames": DAYS,
+  "dayNamesShort": ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+  "dayNamesMin": ["Su","Mo","Tu","We","Th","Fr","Sa"],
+  "monthNames": MONTHS,
+  "monthNamesShort": ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+};

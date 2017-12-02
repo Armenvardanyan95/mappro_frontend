@@ -49,14 +49,29 @@ button {
   background: #fff;
 }
 .new-color{
-  margin: -30px 20px 0 0;
+  margin: 33px 20px 0 0;
   height: 31px;
   line-height: 5px !important;
 }
 .fixed-header{
-  z-index: 999999;
+  z-index: 9;
   position: fixed !important;
   top: 0 !important;
 }
 
+.archive-button {
+  left: -194% !important;
+}
+.calendar-div a{
+  position: absolute;
+  top: 0;
+  right: 26em;
+  color: #fff;
+}
 
+.calendar-div2 a{
+  position: absolute;
+  top: 0;
+  right: 20em;
+  color: #fff;
+}

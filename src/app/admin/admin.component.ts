@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {FormGroup, FormBuilder} from '@angular/forms';
-import {MdDialog, MdSnackBar} from '@angular/material';
-import { MarkerManager, AgmMarker } from '@agm/core';
+import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import { AgmMarker } from '@agm/core';
+import { SelectItem } from 'primeng/primeng';
 
-import {UserService, ColorMarkerService, GoogleMapsService, OrderService} from "app/common/services";
+import {UserService, ColorMarkerService, OrderService} from "app/common/services";
 import {ColorMarkerComponent} from "../color-marker/color-marker.component";
-import {Marker} from "@agm/core/services/google-maps-types";
-
 
 
 @Component({
@@ -20,26 +18,84 @@ export class AdminComponent implements OnInit {
   @ViewChild('map') map: any;
 
   public form: FormGroup;
+  public idQuery: number;
   public submitted: boolean = false;
   public showNewOrderForm: boolean = false;
   public colors: Array<IColorMarker>;
   public orders: Array<IOrder> = [];
-  public currentPlace: ICoordinates;
+  public currentPlace: ICoordinates = <ICoordinates>{lat: 40.6489710, lng: -74.1698883};
   public markerCoordinates: ICoordinates;
   public zoom: number = 8;
+  public allSelected: boolean = false;
+  public allOrders: IOrder[] = [];
+  public selectFromMode: boolean = false;
+  public selectToMode: boolean = false;
+  public archiveMode: boolean = false;
+  public search: {query: string, colors: number[], users: number[]} = {query: '', colors: [], users: []};
 
   users: Array<IUser>;
   title: string = 'My first AGM project';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder, private colorMarkerService: ColorMarkerService,
-              private googleMapsService: GoogleMapsService, private orderService: OrderService,
-              private snackBar: MdSnackBar, private markerManager: MarkerManager) {
+  constructor(private userService: UserService, private colorMarkerService: ColorMarkerService,
+              private renderer: Renderer2, private orderService: OrderService) {
   }
 
   ngOnInit() {
     this.getData();
+    this.renderer.listen('window', 'focus', () => {
+      this.searchOrders()
+    });
+  }
+
+  selectAll() {
+    for (const order of this.orders) {
+      order.isSelected = this.allSelected;
+    }
+    this.selectFromMode = this.selectToMode = false;
+  }
+
+  deSelectAll() {
+    for (const order of this.orders) {
+      order.isSelected = false;
+    }
+  }
+
+  addNewUser(user: IUser): void {
+    this.users.push(user);
+  }
+
+  searchOrders(): void {
+    this.orders = this.allOrders.filter((order: IOrder) => {
+      const query = this.search.query.toLowerCase();
+      const orderBelongsToUser: boolean = this.search.users.length ? order.user && this.search.users.indexOf(order.userDetails.id) !== -1 : true;
+      const orderBelongsToColor: boolean = this.search.colors.length ? order.colorMarkerDetails && this.search.colors.indexOf(order.colorMarkerDetails.id) !== -1 : true;
+      return orderBelongsToUser && orderBelongsToColor && (
+          order.address.toLowerCase().indexOf(query) !== -1 ||
+          order.mobilePhone.toLowerCase().indexOf(query) !== -1 ||
+          order.name && order.name.toLowerCase().indexOf(query) !== -1
+        );
+    })
+  }
+
+  selectFromModeOn() {
+    this.selectToMode = false;
+    this.allSelected = false;
+    this.deSelectAll();
+  }
+
+  selectToModeOn() {
+    this.selectFromMode = false;
+    this.allSelected = false;
+    this.deSelectAll();
+  }
+
+  resetMarker(): void {
+    this.markerCoordinates = null;
+  }
+
+  resetMarkerToLastLocation(): void {
+    this.currentPlace = <ICoordinates>{...this.markerCoordinates};
+    this.markerCoordinates = null;
   }
 
   private getData(): void {
@@ -48,7 +104,7 @@ export class AdminComponent implements OnInit {
     this.getOrders();
   }
 
-  private getUsers(): void {
+  public getUsers(): void {
     this.userService.all()
       .subscribe(
         (users: Array<IUser>) => this.users = users,
@@ -56,7 +112,7 @@ export class AdminComponent implements OnInit {
       );
   }
 
-  private getColors(): void {
+  public getColors(): void {
     this.colorMarkerService.all().subscribe((res: Array<IColorMarker>) => this.colors = res);
   }
 
@@ -66,21 +122,35 @@ export class AdminComponent implements OnInit {
 
   public getOrders(): void {
     this.orderService.getAll()
+      .do(() => {
+        this.orders = [];
+        this.allOrders = [];
+      })
       .switchMap(res => res)
       .map((order: IOrder) => {
         order.isVisible = false;
         order.isSelected = false;
-        const removeTrailingZeros = (time: string) => time.split(':').slice(0, 2).join(':');
-        order.timeTo = removeTrailingZeros(order.timeTo);
-        order.timeFrom = removeTrailingZeros(order.timeFrom);
+        if (order.timeTo || order.timeFrom) {
+          const removeTrailingZeros = (time: string) => time.split(':').slice(0, 2).join(':');
+          if (order.timeTo) {
+            order.timeTo = removeTrailingZeros(order.timeTo);
+          }
+          if (order.timeFrom) {
+            order.timeFrom = removeTrailingZeros(order.timeFrom);
+          }
+        }
         return order;
       })
-      .subscribe((order: IOrder) => this.orders.push(order));
+      .subscribe((order: IOrder) => {
+        this.orders.push(order);
+        this.allOrders.push(order);
+      });
   }
 
   setMarker(event: {coords: ICoordinates}): void {
     this.zoomTo(event.coords);
     this.markerCoordinates = event.coords;
+    this.showNewOrderForm = true;
   }
 
   zoomTo(orderInstance: ICoordinates): void {
@@ -109,7 +179,43 @@ export class AdminComponent implements OnInit {
     this.zoomTo(orderInstance);
   }
 
+  orderHasBeenSelected(index: number) {
+    if (this.selectFromMode) {
+      for (let i = this.orders.length - index; i < this.orders.length; i++) {
+        this.orders[i].isSelected = true;
+      }
+    } else if (this.selectToMode) {
+      for (let i = 0; i < this.orders.length - index; i++) {
+        this.orders[i].isSelected = true;
+      }
+    }
+  }
+
   toggleShowNewOrderForm(event: boolean) {
     this.showNewOrderForm = event;
+  }
+
+  archived(ids: number[]): void {
+    this.getOrders();
+  }
+
+  mapUsersToSelectItem(users: IUser[]): SelectItem[] {
+    if(!users) return [];
+    return users.map((user: IUser) => {
+      return {
+        label: `${user.firstName} ${user.lastName}`,
+        value: user.id
+      };
+    });
+  }
+
+  mapColorsToSelectItem(colors: IColorMarker[]): SelectItem[] {
+    if(!colors) return [];
+    return colors.map((color: IColorMarker) => {
+      return {
+        label: `${color.name}`,
+        value: color.id
+      };
+    });
   }
 }
