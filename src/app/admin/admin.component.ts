@@ -5,6 +5,7 @@ import { SelectItem } from 'primeng/primeng';
 
 import {UserService, ColorMarkerService, OrderService} from "app/common/services";
 import {ColorMarkerComponent} from "../color-marker/color-marker.component";
+import {BrowserService} from "../common/services/browser.service";
 
 
 @Component({
@@ -37,14 +38,12 @@ export class AdminComponent implements OnInit {
   title: string = 'My first AGM project';
 
   constructor(private userService: UserService, private colorMarkerService: ColorMarkerService,
-              private renderer: Renderer2, private orderService: OrderService) {
+              private browser: BrowserService, private orderService: OrderService) {
   }
 
   ngOnInit() {
     this.getData();
-    this.renderer.listen('window', 'focus', () => {
-      this.searchOrders()
-    });
+    this.browser.onBecameVisible.filter(value => !value).subscribe(() => this.getOrders());
   }
 
   selectAll() {

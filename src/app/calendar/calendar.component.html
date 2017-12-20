@@ -22,14 +22,14 @@
   </div>
 
   <div [ngClass]="{'right-part': !selectedOrder, 'middle-part': selectedOrder}">
-    <p-dataTable *ngIf="calendar && calendar.length" [value]="calendar">
+    <p-dataTable *ngIf="calendar && calendar.length" [value]="calendar" [style]="{overflow: 'visible'}">
       <p-column field="time" header="Time" [style]="{'width': '53px'}">
         <ng-template pTemplate let-day="rowData">
           <div style="font-size: 12px !important;">{{ day.time.time }}<sup>{{day.time.type}}</sup></div>
         </ng-template>
       </p-column>
 
-      <p-column *ngFor="let d of days; let i=index" [field]="d" [header]="dayNames[i] + ' ' + d">
+      <p-column *ngFor="let d of days; let i=index" [field]="d" [header]="dayNames[i] + ' ' + d" [style]="{overflow: 'visible'}">
         <ng-template pTemplate let-day="rowData">
           <ng-container *ngFor="let order of day[d].orders">
             <div class="order-cell" (contextmenu)="selectOrder(order, $event)" (click)="details.toggle($event)"
@@ -38,8 +38,12 @@
                 <md-icon style="cursor: pointer;  position: absolute; right: 0;font-size: 18px; width: 16px; top: -2px" (click)="deleteOrder($event, order)" title="Delete">close</md-icon>
               </strong>
             </div>
-            <p-overlayPanel #details [style]="{border: '4px solid ' + order.colorMarkerDetails.color}">
+            <p-overlayPanel #details appendTo="body" [style]="{border: '4px solid ' + order.colorMarkerDetails.color, 'max-width': '700px'}">
               <p-header>
+                <div style="text-align: center" class="noselect">
+                  <button pButton icon="fa-check" *ngIf="order.isArchived" class="archived-button noselect" (click)="dearchiveOrder(order)"></button>
+                  <button pButton icon="fa-circle" *ngIf="!order.isArchived" class="charchived-button noselect" (click)="archiveOrder(order)"></button>
+                </div>
                 <strong>{{ order.rank }} <br/> {{ order.name }}</strong>
               </p-header>
               <div class="comment-order" *ngIf="order.mobilePhone">
@@ -62,11 +66,9 @@
                 {{ order.comment }}
               </div>
               <br/>
-              <md-select class="marker-color-modal" placeholder="Marker Color" [(ngModel)]="order.colorMarkerDetails.id" (ngModelChange)="updateOrderColor(order)">
-                <md-option *ngFor="let color of colors" [value]="color.id" [style.background]="color.color">
-                  {{ color.name }}
-                </md-option>
-              </md-select>
+              <p-dropdown class="marker-color-modal" placeholder="Marker Color" [options]="colors | map : mapColorsToSelectItem"
+                         [(ngModel)]="order.colorMarkerDetails.id" [style]="{'width': '20%'}" (ngModelChange)="updateOrderColor(order)">
+              </p-dropdown>
             </p-overlayPanel>
           </ng-container>
         </ng-template>
@@ -107,7 +109,7 @@
         </p-multiSelect>
         </div>
         <div style="min-width: 100%; margin-top: 10px">
-          <p-calendar showIcon="true" dateFormat="dd/mm/yy" [(ngModel)]="search.date" (ngModelChange)="massFilterOrders()"></p-calendar>
+          <p-calendar showIcon="true" dateFormat="mm/dd/yy" [(ngModel)]="search.date" (ngModelChange)="massFilterOrders()"></p-calendar>
         </div>
         <div>
           <md-input-container>

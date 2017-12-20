@@ -7,13 +7,13 @@
     </div>
     <div class="rwgerg">{{ order.name }}</div>
   </div>
-  <h6 class="inner-div">
-    <md-icon class="address-icon">home</md-icon>
-    {{ order.address }}
-  </h6>
 </div>
 <ng-container *ngIf="order.isVisible">
     <md-list class="only-this-margin" (dblclick)="openEditDialog()">
+      <h6 class="inner-div">
+        <md-icon class="address-icon">home</md-icon>
+        {{ order.address }}
+      </h6>
       <div class="comment-order" *ngIf="order.mobilePhone">
         <md-icon>phone</md-icon> {{ order.mobilePhones.join(', ') }}
       </div>

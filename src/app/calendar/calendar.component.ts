@@ -6,6 +6,7 @@ import { UserService, OrderService, ColorMarkerService } from 'app/common/servic
 import { OrderDeleteComponent } from '../order-delete/order-delete.component';
 import { OrderDeleteByDateComponent } from '../order-delete-by-date/order-delete-by-date.component';
 import {SelectItem} from "primeng/components/common/selectitem";
+import {BrowserService} from "../common/services/browser.service";
 
 
 declare type TimeFormat = 'am' | 'pm';
@@ -33,7 +34,6 @@ export class CalendarComponent implements OnInit, OnChanges {
   allSelected: boolean = false;
   orders: IOrder[] = [];
   archiveMode: boolean = false;
-  className = 'allah';
   search = {
     search: '',
     date: null,
@@ -41,15 +41,20 @@ export class CalendarComponent implements OnInit, OnChanges {
   };
 
   constructor(private userService: UserService, private orderService: OrderService,
-              private colorMarkerService: ColorMarkerService, private dialog: MdDialog, private snackBar: MdSnackBar) { }
+              private colorMarkerService: ColorMarkerService, private dialog: MdDialog, private browser: BrowserService) { }
 
   ngOnInit() {
     this.setWeek();
+    this.getData();
+    this.browser.onBecameVisible.filter(value => !value).subscribe(() => this.getData());
+  }
+
+  private getData(): void {
     this.searchForOrders();
     this.userService.all().switchMap((users: IUser[]) => users).map((user: IUser) => {
       user.isSelected = false;
       return user;
-    }).subscribe((user: IUser)=> this.users.push(user));
+    }).toArray().subscribe((users: IUser[])=> this.users = users);
     this.colorMarkerService.all().switchMap((colors: IColorMarker[]) => colors).map((color: IColorMarker) => {
       color.isSelected = false;
       return color;
@@ -63,13 +68,28 @@ export class CalendarComponent implements OnInit, OnChanges {
     console.log(changes, 'changes');
   }
 
-  private getWeekDays(date: Date): [Date, Date] {
-    const first = date.getDate() - date.getDay() + 1; // First day is the day of the month - the day of the week
-    const last = first + 6; // last day is the first day + 6
+  private getMondayOfWeek(date: Date = new Date()) {
+    var day = date.getDay();
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate() + (day == 0?-6:1)-day );
+  }
 
-    const firstday = new Date(date.setDate(first));
-    const lastday = new Date(date.setDate(last));
-    return [firstday, lastday];
+  private getSundayOfWeek(date: Date = new Date()) {
+    var day = date.getDay();
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate() + (day == 0?0:7)-day );
+  }
+
+  private getWeekDays(date: Date): [Date, Date] {
+    const first = this.getMondayOfWeek(date); // First day is the day of the month - the day of the week
+    const last = this.getSundayOfWeek(date); // last day is the first day + 6
+    return [first, last];
+  }
+
+  archiveOrder(order: IOrder): void {
+    this.orderService.archive([order.id]).subscribe(() => order.isArchived = !order.isArchived);
+  }
+
+  dearchiveOrder(order: IOrder): void {
+    this.orderService.dearchive([order.id]).subscribe(() => order.isArchived = !order.isArchived);
   }
 
   public searchForOrders(): void {
@@ -78,7 +98,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       range: this.dateRange,
       colors: this.colors.filter((color: IColorMarker) => color.isSelected).map(c => c.id)
     }).map((orders: IOrder[]) => {
-
+      console.log(orders);
       for (let order of orders) {
         if (order.timeTo || order.timeFrom) {
           const removeTrailingZeros = (time: string) => time.split(':').slice(0, 2).join(':');
@@ -95,6 +115,16 @@ export class CalendarComponent implements OnInit, OnChanges {
       .subscribe((res: IOrder[]) => this.calendar = this.makeTableData(res));
   }
 
+  mapColorsToSelectItem(colors: IColorMarker[]): SelectItem[] {
+    if(!colors) return [];
+    return colors.map((color: IColorMarker) => {
+      return {
+        label: `${color.name}`,
+        value: color.id
+      };
+    });
+  }
+
   updateOrderColor(order: IOrder): void {
     this.orderService.changeOrderColor(order.id, order.colorMarkerDetails.id)
       .subscribe(res => this.searchForOrders());
@@ -104,7 +134,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     const dateArray: string[] = date.split(':');
     var hours = +dateArray[0];
     var minutes = +dateArray[1];
-    var ampm = hours >= 12 ? 'pm' : 'am';
+    var ampm = hours > 12 ? 'pm' : 'am';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
     const minutesFinal = minutes < 10 ? '0'+minutes : minutes;

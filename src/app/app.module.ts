@@ -46,6 +46,7 @@ import {IsNotAdminGuard} from './common/guards/is-not-admin.guard';
 import { TableComponent } from './table/table.component';
 import {UserDeleteComponent} from "./user-delete/user-delete.component";
 import { OrdersByIDPipe } from './common/pipes/orders-by-id.pipe';
+import {BrowserService} from "./common/services/browser.service";
 
 
 const routes: Routes = [
@@ -130,7 +131,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   providers: [UserService, MdSnackBar, AuthGuard, IsAdminGuard, IsNotAdminGuard, ColorMarkerService,
-    GoogleMapsService, OrderService, MarkerManager, GoogleMapsAPIWrapper],
+    GoogleMapsService, OrderService, MarkerManager, GoogleMapsAPIWrapper, BrowserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

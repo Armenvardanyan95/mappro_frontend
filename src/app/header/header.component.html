@@ -10,12 +10,14 @@
     <button md-raised-button type="button" (click)="logout()" class="log-out">
     	<img src="../../assets/logout.png" alt="Log Out" width="30" height="30">
     </button>
-  </div>
-  <div class="calendar-div">
-    <a [routerLink]="['/calendar']" target="_blank">Calendar</a>
-  </div>
+    <div class="calnerdar-header">
+      <div class="calendar-div">
+        <a [routerLink]="['/calendar']" target="_blank">Calendar</a>
+      </div>
 
-  <div class="calendar-div2">
-    <a [routerLink]="['/table']" target="_blank">Table</a>
+      <div class="calendar-div2">
+        <a [routerLink]="['/table']" target="_blank">Table</a>
+      </div>
+    </div>
   </div>
 </md-toolbar>

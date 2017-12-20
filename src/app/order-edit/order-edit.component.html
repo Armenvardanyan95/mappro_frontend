@@ -6,7 +6,7 @@
 
   <div>
 
-    <md-input-container>
+    <md-input-container style="width: 100%">
       <input type="text" mdInput formControlName="address" placeholder="Address" [mdAutocomplete]="auto" (focus)="isMapVisible = true">
     </md-input-container>
     <agm-map [zoom]="8" *ngIf="isInPopup && currentPlace && isMapVisible"
@@ -67,7 +67,7 @@
   </div>
 
   <div class="alert-danger">
-    <p-calendar placeholder="Choose a Date" formControlName="date" showIcon="true" dateFormat="dd/mm/yy"></p-calendar>
+    <p-calendar placeholder="Choose a Date" formControlName="date" showIcon="true" dateFormat="mm/dd/yy"></p-calendar>
     <div *ngIf="form.controls['date'].errors">
       <div *ngIf="form.controls['date'].errors.required && (form.controls['date'].touched || submitted)">
         This field is required

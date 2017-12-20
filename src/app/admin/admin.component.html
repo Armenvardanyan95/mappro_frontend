@@ -1,4 +1,4 @@
-<app-header (showNewOrderFormChange)="toggleShowNewOrderForm($event)"
+<app-header (showNewOrderFormChange)="toggleShowNewOrderForm($event); listOfOrders.scrollTop = 0"
             [orderIds]="selectedOrderIds" [colors]="colors" [showNewOrderForm]="showNewOrderForm"
             (onArchived)="archived($event)" [archiveMode]="archiveMode" (shouldUpdateColors)="getColors()"
             (canArchivate)="archiveMode = $event" (shouldUpdateOrders)="getOrders()"></app-header>
@@ -20,36 +20,38 @@
 </md-card>
 
 
-<md-list class="scrollable">
-  <md-card  *ngIf="showNewOrderForm" class="md-lav-card">
+<div class="scrollable" #listOfOrders>
+  <md-list>
+    <md-card  *ngIf="showNewOrderForm" class="md-lav-card">
 
-    <app-order-edit [(currentPlace)]="markerCoordinates" (orderUpdated)="getOrders(); resetMarkerToLastLocation(); showNewOrderForm = false"
-                    [colors]="colors" [users]="users"></app-order-edit>
+      <app-order-edit [(currentPlace)]="markerCoordinates" (orderUpdated)="getOrders(); resetMarkerToLastLocation(); showNewOrderForm = false"
+                      [colors]="colors" [users]="users"></app-order-edit>
 
-  </md-card>
+    </md-card>
 
-  <div *ngIf="archiveMode">
-    <md-checkbox [(ngModel)]="allSelected" (change)="selectAll()">Select All</md-checkbox>
-    <md-checkbox [(ngModel)]="selectFromMode" (change)="selectFromModeOn()">Select From</md-checkbox>
-    <md-checkbox [(ngModel)]="selectToMode" (change)="selectToModeOn()">Select To</md-checkbox>
-  </div>
+    <div *ngIf="archiveMode">
+      <md-checkbox [(ngModel)]="allSelected" (change)="selectAll()">Select All</md-checkbox>
+      <md-checkbox [(ngModel)]="selectFromMode" (change)="selectFromModeOn()">Select From</md-checkbox>
+      <md-checkbox [(ngModel)]="selectToMode" (change)="selectToModeOn()">Select To</md-checkbox>
+    </div>
 
-  <p-multiSelect [options]="colors | map : mapColorsToSelectItem" [(ngModel)]="search.colors" (ngModelChange)="searchOrders()" defaultLabel="Colors"></p-multiSelect>
-  <p-multiSelect class="user-select" [options]="users | map : mapUsersToSelectItem" [(ngModel)]="search.users" (ngModelChange)="searchOrders()" defaultLabel="Users"></p-multiSelect>
-  <br>
-  <md-input-container>
-    <input autocomplete="off" [(ngModel)]="search.query" (ngModelChange)="searchOrders()" placeholder="Search" mdInput/>
-  </md-input-container>
+    <p-multiSelect [options]="colors | map : mapColorsToSelectItem" [(ngModel)]="search.colors" (ngModelChange)="searchOrders()" defaultLabel="Colors"></p-multiSelect>
+    <p-multiSelect class="user-select" [options]="users | map : mapUsersToSelectItem" [(ngModel)]="search.users" (ngModelChange)="searchOrders()" defaultLabel="Users"></p-multiSelect>
+    <br>
+    <md-input-container>
+      <input autocomplete="off" [(ngModel)]="search.query" (ngModelChange)="searchOrders()" placeholder="Search" mdInput/>
+    </md-input-container>
 
-  <md-input-container>
-    <input type="number" autocomplete="off" [(ngModel)]="idQuery" placeholder="Search by Rank" mdInput/>
-  </md-input-container>
+    <md-input-container>
+      <input type="number" autocomplete="off" [(ngModel)]="idQuery" placeholder="Search by Rank" mdInput/>
+    </md-input-container>
 
-  <ng-container *ngFor="let order of (orders | ordersByID : idQuery); let i=index">
-      <app-order-view [index]="order.notArchivedRank" [order]="order" (orderMadeVisible)="changeOrderVisibility(order)"
-                      [archiveMode]="archiveMode" (orderSelected)="orderHasBeenSelected($event)"
-                      [colors]="colors" [users]="users" (orderUpdated)="getOrders()"></app-order-view>
-  </ng-container>
-</md-list>
+    <ng-container *ngFor="let order of (orders | ordersByID : idQuery); let i=index">
+        <app-order-view [index]="order.notArchivedRank" [order]="order" (orderMadeVisible)="changeOrderVisibility(order)"
+                        [archiveMode]="archiveMode" (orderSelected)="orderHasBeenSelected($event)"
+                        [colors]="colors" [users]="users" (orderUpdated)="getOrders()"></app-order-view>
+    </ng-container>
+  </md-list>
+</div>
 
 <app-footer (userCreated)="getUsers()" (userDeleted)="getUsers()"></app-footer>

@@ -135,7 +135,17 @@ export class OrderEditComponent implements OnInit, OnChanges {
   }
 
   getNormalTimeFromAmPm(time: ITime): string {
-    const convertFromAmPm = (t: number, i: number) => !i ? time.type === 'pm' ? t + 12 : t : t;
+    const convertFromAmPm = (t: number, i: number) => {
+      if (!i) {
+        if (time.type === 'pm') {
+          return t + 12;
+        } else {
+          return t;
+        }
+      } else {
+        return t;
+      }
+    };
     const mapToHourOrMinuteWithZero = (t: string) => t.length === 1 ? `0${t}` : t;
     const times: Array<number> = time.time.split(':').map((t: string) => +t);
     const realTime: string = times
@@ -143,6 +153,7 @@ export class OrderEditComponent implements OnInit, OnChanges {
       .map((t: number) => t.toString())
       .map(mapToHourOrMinuteWithZero)
       .join(':');
+    realTime;
     return realTime;
   }
 

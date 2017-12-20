@@ -1,5 +1,5 @@
 <div>
-  <md-input-container>
+  <md-input-container style="width: 100%;">
     <input *ngIf="!isPassword" type="text" [formControl]="control" mdInput [placeholder]="placeholder">
     <input *ngIf="isPassword" type="password" [formControl]="control" mdInput [placeholder]="placeholder">
   </md-input-container>

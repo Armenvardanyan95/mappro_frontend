@@ -143,6 +143,19 @@ export class OrderService {
           if (matchingDates.length) {
             const index: number = matchingDates.indexOf(order.date);
             finalArray[index].orders.push(order);
+            finalArray[index].orders.sort((ord1: IOrder, ord2: IOrder) => {
+              const [h1, m1] = ord1.timeFrom.split(':');
+              const date1 = new Date();
+              date1.setHours(+h1);
+              date1.setMinutes(+m1);
+
+              const [h2, m2] = ord2.timeFrom.split(':');
+              const date2 = new Date();
+              date2.setHours(+h2);
+              date2.setMinutes(+m2);
+
+              return date1 > date2 ? 1 : -1;
+            });
           } else {
             finalArray.push({date: order.date, orders: [order]});
           }
