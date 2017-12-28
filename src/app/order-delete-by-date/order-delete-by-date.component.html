@@ -1,0 +1,17 @@
+<div style="min-height: 300px; min-width: 400px">
+  <form (ngSubmit)="delete()" [formGroup]="form">
+    <div>
+      <label>From: </label>
+      <p-calendar showIcon="true" dateFormat="mm/dd/yy" formControlName="from"></p-calendar>
+    </div>
+
+    <div>
+      <label>To: </label>
+      <p-calendar showIcon="true" dateFormat="mm/dd/yy" formControlName="to"></p-calendar>
+    </div>
+
+    <div>
+      <button md-raised-button>Delete</button>
+    </div>
+  </form>
+</div>

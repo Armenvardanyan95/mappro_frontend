@@ -1,0 +1,69 @@
+<div class="header-table">
+  <span *ngIf="count || count == 0">Total records: {{ count }}</span>
+  <button pButton label="Delete Orders" [disabled]="!selectedOrders.length" icon="fa-trash-o" class="button-delete" iconPos="left" (click)="deleteOrders(selectedOrders)"></button>
+</div>
+
+<p-dataTable [lazy]="true" (onLazyLoad)="lazyLoadOrders($event)" #dt emptyMessage="Nothing to show"
+             [totalRecords]="count" [value]="orders" [rows]="20" [loading]="loading" [style]="{'overflow': 'visible'}"
+             [paginator]="true" [reorderableColumns]="true" [resizableColumns]="true"
+             selectionMode="multiple" [(selection)]="selectedOrders" dataKey="id">
+
+ <p-column header="#" field="rank" [filter]="true" [style]="{'width':'3%'}"></p-column>
+
+  <p-column header="Arch" field="isArchived" [style]="{'width':'2.5%'}">
+    <ng-template pTemplate let-order="rowData">
+      <div style="text-align: center" class="noselect">
+        <button pButton icon="fa-check" *ngIf="order.isArchived" class="archived-button noselect" (click)="dearchiveOrder(order.id)"></button>
+        <button pButton icon="fa-circle" *ngIf="!order.isArchived" class="charchived-button noselect" (click)="archiveOrder(order.id)"></button>
+      </div>
+    </ng-template>
+  </p-column>
+
+ <p-column header="Name" field="name" [filter]="true" filterPlaceholder="Search by name"></p-column>
+ <p-column header="Address" field="address" [filter]="true" filterPlaceholder="Search by address"></p-column>
+ <p-column header="Mobile" field="mobilePhone" [filter]="true" filterPlaceholder="Search by phone"></p-column>
+ <p-column header="Created on" field="created">
+   <ng-template pTemplate let-order="rowData">
+     {{ order.created | date : 'medium'}}
+   </ng-template>
+ </p-column>
+
+
+  <p-column header="Date" field="date" [style]="{'overflow':'visible', 'width':'7%'}">
+    <ng-template pTemplate let-order="rowData">
+      {{ order.date ? (order.date | date ) : '' }}
+    </ng-template>
+  </p-column>
+
+  <p-column header="Time from / Time to">
+    <ng-template pTemplate let-order="rowData">
+      {{ order.timeFrom ?  (order.timeFrom | timeAmPm).time : '-'}} <sup>{{ order.timeFrom ? (order.timeFrom | timeAmPm).type : '' }}</sup> / {{ order.timeTo ? (order.timeTo | timeAmPm).time : '-' }} <sup>{{ order.timeTo ? (order.timeTo | timeAmPm).type : ''}}</sup>
+    </ng-template>
+  </p-column>
+
+  <p-column header="Problem" field="problem"></p-column>
+  <p-column header="Comment" field="comment"></p-column>
+
+   <p-column header="User" field="user" [style]="{'overflow':'visible', 'width':'9%'}">
+     <ng-template pTemplate="filter" let-col>
+       <p-multiSelect [options]="users" class="marker-dropdown" [style]="{'width':'100%'}" placeholder="Search by user"
+                   (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"  styleClass="ui-column-filter"></p-multiSelect>
+     </ng-template>
+
+     <ng-template pTemplate let-order="rowData">
+       {{ order.userDetails?.firstName }} {{ order.userDetails?.lastName }}
+     </ng-template>
+   </p-column>
+
+   <p-column header="Marker" [style]="{'width':'6%', 'overflow':'visible'}" field="color">
+     <ng-template pTemplate="filter" let-col>
+       <p-multiSelect [options]="colors" class="marker-dropdown" [style]="{'width':'100%'}" placeholder="By Marker"
+                   (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"  styleClass="ui-column-filter"></p-multiSelect>
+     </ng-template>
+
+     <ng-template pTemplate let-order="rowData">
+       <img [src]="order.colorMarkerDetails.image" width="25" height="25"/>
+     </ng-template>
+   </p-column>
+
+</p-dataTable>

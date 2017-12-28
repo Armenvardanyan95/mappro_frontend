@@ -1,0 +1,77 @@
+app-table {
+    padding: 5px;
+}
+
+.marker-dropdown {
+    z-index: 100 !important;
+}
+
+.header-table {
+  padding: 2px;
+  margin-bottom: 10px;
+  span {
+      font-size: 20px;
+  }
+  button {
+      float: right;
+  }
+}
+
+.ui-datatable {
+  margin-top: 0px !important;
+}
+
+.button-delete {
+  background-color: #ef0000;
+  border: none;
+}
+
+.archived-button {
+  margin: 0 auto;
+  width: 0px;
+  color: #00f966;
+  background-color: transparent;
+  border: none;
+
+}
+
+.archived-button:hover {
+  color: #ef0000 !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.archived-button:active {
+  color: #ef0000 !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.charchived-button {
+  width: 0px;
+  color: #ef0000;
+  background-color: transparent;
+  border: none;
+}
+
+.charchived-button:hover {
+  color: #00f966 !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.charchived-button:active {
+  color: #00f966 !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}

@@ -1,0 +1,51 @@
+<div class="outer-container">
+  <p-menubar [model]="items">
+    <p-calendar [(ngModel)]="date" (ngModelChange)="filterByDate()" placeholder="Search"></p-calendar>
+    <button pButton label="Logout" icon="fa-sign-out" (click)="logout()"></button>
+  </p-menubar>
+
+
+  <p-accordion>
+
+    <p-accordionTab *ngFor="let date of dates" [header]="date.date | date : 'mediumDate'">
+
+      <p-accordion>
+        <p-accordionTab *ngFor="let order of date.orders" [header]="(order.timeFrom | timeAmPm : 'string') + ' - ' + (order.timeTo | timeAmPm : 'string') + ' # ' + order.name"
+                 [style]="{'background-color': makeRGBWithAlpha(order.colorMarkerDetails.color)}">
+          <md-list class="only-this-margin">
+            <div class="comment-order">
+              <md-icon class="address-icon">home</md-icon>
+              {{ order.address }}
+            </div>
+            <div class="comment-order" *ngIf="order.mobilePhone">
+              <md-icon>phone</md-icon> {{ order.mobilePhone }}
+            </div>
+            <div class="comment-order" *ngIf="order.problem">
+              <md-icon>warning</md-icon>
+              {{ order.problem }}
+            </div>
+            <div class="comment-order" *ngIf="order.date || order.timeFrom || order.timeTo">
+              <md-icon>update</md-icon>
+              {{ order.date | date }} {{ (order.timeFrom | timeAmPm).time }} <sup>{{ (order.timeFrom | timeAmPm).type }}</sup> <ng-container *ngIf="order.timeTo"> - {{ (order.timeTo | timeAmPm).time }} <sup>{{ (order.timeTo | timeAmPm).type }}</sup></ng-container>
+            </div>
+            <div class="comment-order" *ngIf="order.comment">
+              <md-icon>comment</md-icon>
+              {{ order.comment }}
+            </div>
+            <div class="color-select">
+              Color:
+              <md-select class="marker-color-modal" placeholder="Marker Color" [style.background]="colors | colorTransform : order.colorMarkerDetails.id"
+                         [(ngModel)]="order.colorMarkerDetails.id" (ngModelChange)="changeOrderColor(order)">
+                <md-option *ngFor="let color of colors" [value]="color.id" [style.background]="color.color">
+                  {{ color.name }}
+                </md-option>
+              </md-select>
+            </div>
+          </md-list>
+        </p-accordionTab>
+      </p-accordion>
+
+    </p-accordionTab>
+
+  </p-accordion>
+</div>
