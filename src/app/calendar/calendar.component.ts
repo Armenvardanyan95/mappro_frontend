@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';
-import { MdDialog, MdDialogRef, MdSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 
 import {TIME_VALUES, DAYS, CALENDAR_SETTINGS} from 'app/settings';
 import { UserService, OrderService, ColorMarkerService } from 'app/common/services';
@@ -41,7 +41,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   };
 
   constructor(private userService: UserService, private orderService: OrderService,
-              private colorMarkerService: ColorMarkerService, private dialog: MdDialog, private browser: BrowserService) { }
+              private colorMarkerService: ColorMarkerService, private dialog: MatDialog, private browser: BrowserService) { }
 
   ngOnInit() {
     this.setWeek();
@@ -222,7 +222,7 @@ export class CalendarComponent implements OnInit, OnChanges {
 
   deleteOrder(event: MouseEvent, order: IOrder): void {
     event.stopPropagation();
-    const dialog: MdDialogRef<OrderDeleteComponent> = this.dialog.open(OrderDeleteComponent);
+    const dialog: MatDialogRef<OrderDeleteComponent> = this.dialog.open(OrderDeleteComponent);
     dialog.componentInstance.orders = [order.id];
     dialog.componentInstance.dialogClosed.subscribe(() => dialog.close());
     dialog.componentInstance.colorDeleted.subscribe(() => {
@@ -247,7 +247,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   public deleteMultipleOrders() {
-    const dialog: MdDialogRef<OrderDeleteByDateComponent> = this.dialog.open(OrderDeleteByDateComponent);
+    const dialog: MatDialogRef<OrderDeleteByDateComponent> = this.dialog.open(OrderDeleteByDateComponent);
     dialog.componentInstance.ordersDeleted.subscribe(() => {
       dialog.close();
       this.searchForOrders();
@@ -274,7 +274,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.archiveMode = true;
     } else {
       this.archiveMode = false;
-      const dialog: MdDialogRef<OrderDeleteComponent> = this.dialog.open(OrderDeleteComponent);
+      const dialog: MatDialogRef<OrderDeleteComponent> = this.dialog.open(OrderDeleteComponent);
       const ordersToBeDeletedIDs = this.selectedOrderIDs();
       dialog.componentInstance.orders = ordersToBeDeletedIDs;
       dialog.componentInstance.dialogClosed.subscribe(() => dialog.close());

@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import {ColorMarkerService} from 'app/common/services';
 
@@ -17,7 +17,7 @@ export class ColorMarkerComponent implements OnInit {
   public colorCreated: EventEmitter<IColorMarker> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private colorMarkerService: ColorMarkerService,
-              private snackbar: MdSnackBar) {
+              private snackbar: MatSnackBar) {
     this.form = formBuilder.group({
       'name': ['', Validators.required],
       'color': ['', Validators.required]

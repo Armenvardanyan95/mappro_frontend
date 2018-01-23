@@ -1,7 +1,7 @@
 .fill-remaining-space {
   flex: 1 1 auto;
 }
-md-toolbar {
+mat-toolbar {
   width: 100% !important;
   height: 12px;
 }

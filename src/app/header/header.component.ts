@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import {MdDialog, MdSnackBar, MdDialogRef} from '@angular/material';
+import {MatDialog, MatSnackBar, MatDialogRef} from '@angular/material';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 import {ColorMarkerComponent} from  'app/color-marker/color-marker.component';
@@ -26,8 +26,8 @@ export class HeaderComponent implements OnInit {
   @Output() shouldUpdateOrders: EventEmitter<boolean> = new EventEmitter();
   @Output() shouldUpdateColors: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private dialog: MdDialog, private orderService: OrderService, private router: Router,
-              private snackBar: MdSnackBar, private localStorage: LocalStorageService) { }
+  constructor(private dialog: MatDialog, private orderService: OrderService, private router: Router,
+              private snackBar: MatSnackBar, private localStorage: LocalStorageService) { }
 
   ngOnInit() {
   }
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openNewColorDialog(): void {
-    const dialog: MdDialogRef<ColorMarkerComponent> = this.dialog.open(ColorMarkerComponent);
+    const dialog: MatDialogRef<ColorMarkerComponent> = this.dialog.open(ColorMarkerComponent);
     dialog.componentInstance.colorCreated.subscribe((color: IColorMarker) => {
       this.colors.push(color);
       dialog.close();
@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   showDeleteColorDialog(color: IColorMarker): void {
-    const dialog: MdDialogRef<ColorMarkerDeleteComponent> = this.dialog.open(ColorMarkerDeleteComponent);
+    const dialog: MatDialogRef<ColorMarkerDeleteComponent> = this.dialog.open(ColorMarkerDeleteComponent);
     dialog.componentInstance.colorMarker = color;
     dialog.componentInstance.dialogClosed.subscribe(() => dialog.close());
     dialog.componentInstance.colorDeleted.subscribe(() => {
