@@ -46,7 +46,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.setWeek();
     this.getData();
-    this.browser.onBecameVisible.filter(value => !value).subscribe(() => this.getData());
+    this.browser.onBecameVisible.filter(value => !value).subscribe(() => this.searchForOrders());
   }
 
   private getData(): void {
