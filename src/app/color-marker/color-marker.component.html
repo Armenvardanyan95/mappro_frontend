@@ -1,18 +1,18 @@
-<h2 md-dialog-title> Add a new color </h2>
+<h2 mat-dialog-title> Add a new color </h2>
 
 <form (ngSubmit)="onSubmit(form.value)">
 
   <app-form-control [control]="form.controls['name']" [placeholder]="'Name'" [submitted]="submitted">
   </app-form-control>
 
-  <md-input-container>
+  <mat-input-container>
     <input [colorPicker]="color" (colorPickerChange)="setColor($event)" [style.background]="color"
-           [value]="color"  mdInput/>
-  </md-input-container>
+           [value]="color"  matInput/>
+  </mat-input-container>
 
 
   <div>
-    <button type="submit" md-raised-button>Submit</button>
+    <button type="submit" mat-raised-button>Submit</button>
   </div>
 
 </form>

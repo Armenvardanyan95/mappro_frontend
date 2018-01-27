@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Response} from "@angular/http";
-import {MdSnackBar, MdSnackBarConfig, MdDialog, MdDialogRef} from '@angular/material';
+import {MatSnackBar, MatSnackBarConfig, MatDialog, MatDialogRef} from '@angular/material';
 
 import {UserService} from 'app/common/services';
 import {PasswordValidator} from 'app/common/validators';
@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   @Output() public userDeleted: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-              private snackBar: MdSnackBar, private dialog: MdDialog) {
+              private snackBar: MatSnackBar, private dialog: MatDialog) {
     this.form = formBuilder.group({
       'id': [''],
       'firstName': ['', Validators.required],
@@ -67,7 +67,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   deleteUser() {
-    const dialog: MdDialogRef<UserDeleteComponent> = this.dialog.open(UserDeleteComponent);
+    const dialog: MatDialogRef<UserDeleteComponent> = this.dialog.open(UserDeleteComponent);
     dialog.componentInstance.users = [this.user.id];
     dialog.componentInstance.userDeleted.subscribe(() => {
       dialog.close();
@@ -84,7 +84,7 @@ export class UserProfileComponent implements OnInit {
     const errors = err.json();
     for (const msg in errors) {
       if (errors.hasOwnProperty(msg)) {
-        this.snackBar.open(errors[msg], 'OK', <MdSnackBarConfig>{duration: 3000});
+        this.snackBar.open(errors[msg], 'OK', <MatSnackBarConfig>{duration: 3000});
       }
     }
   }

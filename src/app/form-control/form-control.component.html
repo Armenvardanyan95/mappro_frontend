@@ -1,14 +1,14 @@
 <div>
-  <md-input-container style="width: 100%;">
-    <input *ngIf="!isPassword" type="text" [formControl]="control" mdInput [placeholder]="placeholder">
-    <input *ngIf="isPassword" type="password" [formControl]="control" mdInput [placeholder]="placeholder">
-  </md-input-container>
+  <mat-input-container style="width: 100%;">
+    <input *ngIf="!isPassword" type="text" [formControl]="control" matInput [placeholder]="placeholder">
+    <input *ngIf="isPassword" type="password" [formControl]="control" matInput [placeholder]="placeholder">
+  </mat-input-container>
   <div *ngIf="control.errors">
-    <md-error *ngIf="control.errors && control.errors.required && (control.touched || submitted)">
+    <mat-error *ngIf="control.errors && control.errors.required && (control.touched || submitted)">
       This field is required
-    </md-error>
-    <md-error *ngIf="control.errors && control.errors.email && (control.touched || submitted)">
+    </mat-error>
+    <mat-error *ngIf="control.errors && control.errors.email && (control.touched || submitted)">
       This is not a valid email
-    </md-error>
+    </mat-error>
   </div>
 </div>

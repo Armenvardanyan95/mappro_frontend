@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from '../common/services/order.service';
-import { MdDialog, MdDialogRef, MdSnackBar} from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {LazyLoadEvent, SelectItem} from 'primeng/primeng';
 import {ColorMarkerService} from '../common/services/color.service';
 import {UserService} from '../common/services/user.service';
@@ -22,7 +22,7 @@ export class TableComponent implements OnInit {
   selectedOrders: IOrder[] = [];
   latestSearchParams: LazyLoadEvent;
 
-  constructor(private orderService: OrderService, private dialog: MdDialog, private browser: BrowserService,
+  constructor(private orderService: OrderService, private dialog: MatDialog, private browser: BrowserService,
               private colorService: ColorMarkerService, private userService: UserService) { }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class TableComponent implements OnInit {
   }
 
   deleteOrders(orders: IOrder[]): void {
-    const dialog: MdDialogRef<OrderDeleteComponent> = this.dialog.open(OrderDeleteComponent);
+    const dialog: MatDialogRef<OrderDeleteComponent> = this.dialog.open(OrderDeleteComponent);
     const ordersToBeDeletedIDs = orders.map((order: IOrder) => order.id);
     dialog.componentInstance.orders = ordersToBeDeletedIDs;
     dialog.componentInstance.dialogClosed.subscribe(() => dialog.close());

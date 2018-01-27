@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import {OrderService, GoogleMapsService} from '../common/services';
 import {TIME_VALUES} from 'app/settings';
@@ -51,7 +51,7 @@ export class OrderEditComponent implements OnInit, OnChanges {
     user: ''
   };
 
-  constructor(private formBuilder: FormBuilder, private snackBar: MdSnackBar,
+  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar,
               private orderService: OrderService, private googleMapsService: GoogleMapsService) {
     this.form = formBuilder.group({
       name: ['', []],

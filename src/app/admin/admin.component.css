@@ -26,7 +26,7 @@ app-header {
   padding-top: 45px !important;
 }
 
-.md-multiselect .md-multiselect-container {
+.mat-multiselect .mat-multiselect-container {
   position: relative;
   display: block;
   width: 70px !important;
@@ -61,7 +61,7 @@ app-footer {
        }
 
 
-.md-lav-card {
+.mat-lav-card {
   z-index: 1;
   margin-bottom: 10px;
   border-bottom: 2px solid #ccc;

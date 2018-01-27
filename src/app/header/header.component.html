@@ -1,13 +1,13 @@
-<md-toolbar class="fixed-header" color="primary">
-  <button class="new-color" (click)="openNewColorDialog()" md-raised-button>New Color</button>
+<mat-toolbar class="fixed-header" color="primary">
+  <button class="new-color" (click)="openNewColorDialog()" mat-raised-button>New Color</button>
   <img class="new-color marker-header" *ngFor="let color of colors"
        (dblclick)="showDeleteColorDialog(color)"   style="width: 30px; height: 30px; cursor: pointer;"
        [src]="color.image" [title]="color.name"/>
 
   <div class="header-right-block">
-    <button (click)="toggleShowNewOrderForm()" md-raised-button class="new-order-btn">New Order</button>
-    <button (click)="archive()" md-raised-button class="new-order-btn archive-button">Archive</button>
-    <button md-raised-button type="button" (click)="logout()" class="log-out">
+    <button (click)="toggleShowNewOrderForm()" mat-raised-button class="new-order-btn">New Order</button>
+    <button (click)="archive()" mat-raised-button class="new-order-btn archive-button">Archive</button>
+    <button mat-raised-button type="button" (click)="logout()" class="log-out">
     	<img src="../../assets/logout.png" alt="Log Out" width="30" height="30">
     </button>
     <div class="calnerdar-header">
@@ -20,4 +20,4 @@
       </div>
     </div>
   </div>
-</md-toolbar>
+</mat-toolbar>
