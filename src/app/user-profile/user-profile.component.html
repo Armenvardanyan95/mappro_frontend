@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>New User</h2>
+<h2 md-dialog-title>New User</h2>
 
 
 <form (ngSubmit)="onSubmit(form.value)">
@@ -23,13 +23,13 @@
                     [submitted]="submitted" [isPassword]="true">
   </app-form-control>
 
-  <mat-error *ngIf="form.errors && form.errors.passwordsDontMatch && ((form.controls['password'].touched && form.controls['confirmPassword'].touched) || submitted)">
+  <md-error *ngIf="form.errors && form.errors.passwordsDontMatch && ((form.controls['password'].touched && form.controls['confirmPassword'].touched) || submitted)">
     Passwords Don't Match
-  </mat-error>
+  </md-error>
 
   <div>
-    <button mat-raised-button type="submit">Submit</button>
-    <button mat-raised-button *ngIf="user && !user.isSuperuser" type="button" (click)="deleteUser()">Delete</button>
+    <button md-raised-button type="submit">Submit</button>
+    <button md-raised-button *ngIf="user && !user.isSuperuser" type="button" (click)="deleteUser()">Delete</button>
   </div>
 
 </form>

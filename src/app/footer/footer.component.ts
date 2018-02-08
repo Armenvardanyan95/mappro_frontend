@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {MatDialog, MatDialogRef} from '@angular/material';
+import {MdDialog, MdDialogRef} from '@angular/material';
 
 import {UserProfileComponent} from 'app/user-profile/user-profile.component';
 import {UserListComponent} from "../user-list/user-list.component";
@@ -15,13 +15,13 @@ export class FooterComponent implements OnInit {
   @Output() userCreated: EventEmitter<IUser> = new EventEmitter();
   @Output() userDeleted: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private dialog: MatDialog) {  }
+  constructor(private dialog: MdDialog) {  }
 
   ngOnInit() {
   }
 
   openNewUserDialog() {
-    const dialog: MatDialogRef<UserProfileComponent> = this.dialog.open(UserProfileComponent);
+    const dialog: MdDialogRef<UserProfileComponent> = this.dialog.open(UserProfileComponent);
     dialog.componentInstance.userCreated.subscribe((user: IUser) => {
       dialog.close();
       this.userCreated.emit(user);

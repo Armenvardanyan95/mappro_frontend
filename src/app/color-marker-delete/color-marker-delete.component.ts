@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MdSnackBar } from '@angular/material';
 
 import { ColorMarkerService } from 'app/common/services';
 
@@ -15,7 +15,7 @@ export class ColorMarkerDeleteComponent implements OnInit {
   @Output() dialogClosed: EventEmitter<boolean> = new EventEmitter();
   @Output() colorDeleted: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private colorMarkerService: ColorMarkerService, private snackbar: MatSnackBar) { }
+  constructor(private colorMarkerService: ColorMarkerService, private snackbar: MdSnackBar) { }
 
   ngOnInit() {
 

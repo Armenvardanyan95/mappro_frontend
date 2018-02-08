@@ -12,36 +12,36 @@
       <p-accordion>
         <p-accordionTab *ngFor="let order of date.orders" [header]="(order.timeFrom | timeAmPm : 'string') + ' - ' + (order.timeTo | timeAmPm : 'string') + ' # ' + order.name"
                  [style]="{'background-color': makeRGBWithAlpha(order.colorMarkerDetails.color)}">
-          <mat-list class="only-this-margin">
+          <md-list class="only-this-margin">
             <div class="comment-order">
-              <mat-icon class="address-icon">home</mat-icon>
+              <md-icon class="address-icon">home</md-icon>
               {{ order.address }}
             </div>
             <div class="comment-order" *ngIf="order.mobilePhone">
-              <mat-icon>phone</mat-icon> {{ order.mobilePhone }}
+              <md-icon>phone</md-icon> {{ order.mobilePhone }}
             </div>
             <div class="comment-order" *ngIf="order.problem">
-              <mat-icon>warning</mat-icon>
+              <md-icon>warning</md-icon>
               {{ order.problem }}
             </div>
             <div class="comment-order" *ngIf="order.date || order.timeFrom || order.timeTo">
-              <mat-icon>update</mat-icon>
+              <md-icon>update</md-icon>
               {{ order.date | date }} {{ (order.timeFrom | timeAmPm).time }} <sup>{{ (order.timeFrom | timeAmPm).type }}</sup> <ng-container *ngIf="order.timeTo"> - {{ (order.timeTo | timeAmPm).time }} <sup>{{ (order.timeTo | timeAmPm).type }}</sup></ng-container>
             </div>
             <div class="comment-order" *ngIf="order.comment">
-              <mat-icon>comment</mat-icon>
+              <md-icon>comment</md-icon>
               {{ order.comment }}
             </div>
             <div class="color-select">
               Color:
-              <mat-select class="marker-color-modal" placeholder="Marker Color" [style.background]="colors | colorTransform : order.colorMarkerDetails.id"
+              <md-select class="marker-color-modal" placeholder="Marker Color" [style.background]="colors | colorTransform : order.colorMarkerDetails.id"
                          [(ngModel)]="order.colorMarkerDetails.id" (ngModelChange)="changeOrderColor(order)">
-                <mat-option *ngFor="let color of colors" [value]="color.id" [style.background]="color.color">
+                <md-option *ngFor="let color of colors" [value]="color.id" [style.background]="color.color">
                   {{ color.name }}
-                </mat-option>
-              </mat-select>
+                </md-option>
+              </md-select>
             </div>
-          </mat-list>
+          </md-list>
         </p-accordionTab>
       </p-accordion>
 

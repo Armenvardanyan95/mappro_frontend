@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {MatSnackBar, MatSnackBarConfig, MatDialog, MatDialogRef} from '@angular/material';
+import {MdSnackBar, MdSnackBarConfig, MdDialog, MdDialogRef} from '@angular/material';
 
 import {UserService} from 'app/common/services';
 import { UserProfileComponent } from 'app/user-profile/user-profile.component';
@@ -16,7 +16,7 @@ export class UserListComponent implements OnInit {
   @Output() userDeleted: EventEmitter<boolean> = new EventEmitter();
   @Output() navigatedFrom: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private userService: UserService, private dialog: MatDialog) { }
+  constructor(private userService: UserService, private dialog: MdDialog) { }
 
   ngOnInit() {
     this.userService.all().subscribe((res: Array<IUser>) => this.users = res);
@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit {
   showUserDialog(user: IUser, event: Event): void {
     event.preventDefault();
     event.stopPropagation();
-    const dialog: MatDialogRef<UserProfileComponent> = this.dialog.open(UserProfileComponent);
+    const dialog: MdDialogRef<UserProfileComponent> = this.dialog.open(UserProfileComponent);
     dialog.componentInstance.user = user;
     dialog.componentInstance.userDeleted.subscribe(() => {
       dialog.close();
