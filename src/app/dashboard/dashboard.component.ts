@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MdSnackBar } from '@angular/material';
 import { MenuItem } from 'primeng/primeng';
 import { LocalStorageService } from 'angular-2-local-storage';
 
@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   public date: Date;
 
   constructor(private orderService: OrderService, private colorMarkerService: ColorMarkerService,
-              private snackbar: MatSnackBar, private router: Router,
+              private snackbar: MdSnackBar, private router: Router,
               private localStorage: LocalStorageService, private route: ActivatedRoute) { }
 
   ngOnInit() {

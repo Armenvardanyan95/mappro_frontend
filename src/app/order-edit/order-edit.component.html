@@ -1,14 +1,14 @@
 <form class="form-modal" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
   <div class="rele">
-    <mat-chip class="abs" color="primary">{{ orderCount }}</mat-chip>
+    <md-chip class="abs" color="primary">{{ orderCount }}</md-chip>
   </div>
   <app-form-control [control]="form.controls['name']" [placeholder]="'Name'" [submitted]="submitted"></app-form-control>
 
   <div>
 
-    <mat-input-container style="width: 100%">
-      <input type="text" matInput formControlName="address" placeholder="Address" [matAutocomplete]="auto" (focus)="isMapVisible = true">
-    </mat-input-container>
+    <md-input-container style="width: 100%">
+      <input type="text" mdInput formControlName="address" placeholder="Address" [mdAutocomplete]="auto" (focus)="isMapVisible = true">
+    </md-input-container>
     <agm-map [zoom]="8" *ngIf="isInPopup && currentPlace && isMapVisible"
              [latitude]="currentPlace && currentPlace.lat" [longitude]="currentPlace && currentPlace.lng"
              (mapRightClick)="setMarker($event)">
@@ -18,16 +18,16 @@
 
     </agm-map>
 
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let place of places" [value]="place.description"
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let place of places" [value]="place.description"
                  (click)="selectPlace(place)" (keydown.enter)="selectPlace(place)">
         {{ place.description }}
-      </mat-option>
-    </mat-autocomplete>
+      </md-option>
+    </md-autocomplete>
     <div *ngIf="form.controls['address'].errors">
-      <mat-error *ngIf="form.controls['address'].errors.required && (form.controls['address'].touched || submitted)">
+      <md-error *ngIf="form.controls['address'].errors.required && (form.controls['address'].touched || submitted)">
         This field is required
-      </mat-error>
+      </md-error>
     </div>
   </div>
 
@@ -37,32 +37,32 @@
   <p-chips [formControl]="form.controls['mobilePhones']" placeholder="Mobile Phone Numbers"></p-chips>
 
   <div>
-    <mat-input-container>
-      <textarea class="problem-modal" formControlName="problem" matInput placeholder="Problem" rows="6" cols="35"></textarea>
-    </mat-input-container>
+    <md-input-container>
+      <textarea class="problem-modal" formControlName="problem" mdInput placeholder="Problem" rows="6" cols="35"></textarea>
+    </md-input-container>
     <div *ngIf="form.controls['problem'].errors">
-      <mat-error *ngIf="form.controls['problem'].errors.required && (form.controls['problem'].touched || submitted)">
+      <md-error *ngIf="form.controls['problem'].errors.required && (form.controls['problem'].touched || submitted)">
         This field is required
-      </mat-error>
+      </md-error>
     </div>
   </div>
 
   <div>
-    <mat-select class="marker-color-modal" placeholder="Marker Color" formControlName="colorMarker">
-      <mat-option *ngFor="let color of colors" [value]="color.id" [style.background]="color.color">
+    <md-select class="marker-color-modal" placeholder="Marker Color" formControlName="colorMarker">
+      <md-option *ngFor="let color of colors" [value]="color.id" [style.background]="color.color">
         {{ color.name }}
-      </mat-option>
-    </mat-select>
+      </md-option>
+    </md-select>
   </div>
 
   <div>
-    <mat-input-container>
-      <textarea formControlName="comment" matInput placeholder="Comment" rows="6" cols="35"></textarea>
-    </mat-input-container>
+    <md-input-container>
+      <textarea formControlName="comment" mdInput placeholder="Comment" rows="6" cols="35"></textarea>
+    </md-input-container>
     <div *ngIf="form.controls['comment'].errors">
-      <mat-error *ngIf="form.controls['comment'].errors.required && (form.controls['comment'].touched || submitted)">
+      <md-error *ngIf="form.controls['comment'].errors.required && (form.controls['comment'].touched || submitted)">
         This field is required
-      </mat-error>
+      </md-error>
     </div>
   </div>
 
@@ -76,28 +76,28 @@
   </div>
 
   <div>
-    <mat-select placeholder="From" formControlName="timeFrom">
-      <mat-option *ngFor="let time of times" [value]="getNormalTimeFromAmPm(time)">{{ time.time }} <sup>{{ time.type }}</sup>
-      </mat-option>
-    </mat-select>
+    <md-select placeholder="From" formControlName="timeFrom">
+      <md-option *ngFor="let time of times" [value]="getNormalTimeFromAmPm(time)">{{ time.time }} <sup>{{ time.type }}</sup>
+      </md-option>
+    </md-select>
 
-    <mat-select placeholder="To" formControlName="timeTo">
-      <mat-option *ngFor="let time of times" [value]="getNormalTimeFromAmPm(time)">{{ time.time }} <sup>{{ time.type }}</sup>
-      </mat-option>
-    </mat-select>
+    <md-select placeholder="To" formControlName="timeTo">
+      <md-option *ngFor="let time of times" [value]="getNormalTimeFromAmPm(time)">{{ time.time }} <sup>{{ time.type }}</sup>
+      </md-option>
+    </md-select>
   </div>
 
   <div>
-    <mat-select class="user-modal" placeholder="User" formControlName="user">
-      <mat-option *ngFor="let user of users" [value]="user.id">
+    <md-select class="user-modal" placeholder="User" formControlName="user">
+      <md-option *ngFor="let user of users" [value]="user.id">
         {{ user.firstName + ' ' + user.lastName }}
-      </mat-option>
-    </mat-select>
+      </md-option>
+    </md-select>
   </div>
 
 
   <div>
-    <button mat-raised-button type="submit">Submit</button>
+    <button md-raised-button type="submit">Submit</button>
   </div>
 
 </form>

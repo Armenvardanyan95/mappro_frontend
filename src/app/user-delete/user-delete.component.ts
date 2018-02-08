@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MdSnackBar } from '@angular/material';
 
 import { UserService } from 'app/common/services';
 
@@ -15,7 +15,7 @@ export class UserDeleteComponent implements OnInit {
   @Output() dialogClosed: EventEmitter<boolean> = new EventEmitter();
   @Output() userDeleted: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private userService: UserService, private snackbar: MatSnackBar) { }
+  constructor(private userService: UserService, private snackbar: MdSnackBar) { }
 
   ngOnInit() {
 

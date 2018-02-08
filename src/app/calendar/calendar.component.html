@@ -1,24 +1,24 @@
-<mat-sidenav-container>
+<md-sidenav-container>
   <div class="left-part">
     <p-calendar dateFormat="mm/dd/yy" [(ngModel)]="dateRange" inline="true" selectOtherMonths="true" selectionMode="range"
                 (onSelect)="selectedDate()" [locale]="en"></p-calendar>
-    <mat-list>
+    <md-list>
       <h4>Users</h4>
-      <mat-list-item *ngFor="let user of users">
-        <mat-checkbox [value]="user.id" [(ngModel)]="user.isSelected" (change)="selectUsers()">
+      <md-list-item *ngFor="let user of users">
+        <md-checkbox [value]="user.id" [(ngModel)]="user.isSelected" (change)="selectUsers()">
           {{ user.firstName }} {{ user.lastName }}
-        </mat-checkbox>
-      </mat-list-item>
-    </mat-list>
+        </md-checkbox>
+      </md-list-item>
+    </md-list>
 
-    <mat-list>
+    <md-list>
       <h4>Colors</h4>
-      <mat-list-item *ngFor="let color of colors">
-        <mat-checkbox [(ngModel)]="color.isSelected" (change)="selectUsers()">
+      <md-list-item *ngFor="let color of colors">
+        <md-checkbox [(ngModel)]="color.isSelected" (change)="selectUsers()">
           <span class="bordery" [style.border-color]="color.color">{{ color.name }}</span>
-        </mat-checkbox>
-      </mat-list-item>
-    </mat-list>
+        </md-checkbox>
+      </md-list-item>
+    </md-list>
   </div>
 
   <div [ngClass]="{'right-part': !selectedOrder, 'middle-part': selectedOrder}">
@@ -35,7 +35,7 @@
             <div class="order-cell" (contextmenu)="selectOrder(order, $event)" (click)="details.toggle($event)"
                  [style.background]="makeRGBWithAlpha(order.colorMarkerDetails.color)" [style.border-color]="order.colorMarkerDetails.color">
               <strong class="wrap" style="font-weight: bolder">{{order.rank }}<br/> {{ order.name }}
-                <mat-icon style="cursor: pointer;  position: absolute; right: 0;font-size: 18px; width: 16px; top: -2px" (click)="deleteOrder($event, order)" title="Delete">close</mat-icon>
+                <md-icon style="cursor: pointer;  position: absolute; right: 0;font-size: 18px; width: 16px; top: -2px" (click)="deleteOrder($event, order)" title="Delete">close</md-icon>
               </strong>
             </div>
             <p-overlayPanel #details appendTo="body" [style]="{border: '4px solid ' + order.colorMarkerDetails.color, 'max-width': '700px'}">
@@ -47,22 +47,22 @@
                 <strong>{{ order.rank }} <br/> {{ order.name }}</strong>
               </p-header>
               <div class="comment-order" *ngIf="order.mobilePhone">
-                <mat-icon>phone</mat-icon> {{ order.mobilePhones.join(', ') }}
+                <md-icon>phone</md-icon> {{ order.mobilePhones.join(', ') }}
               </div>
               <div class="comment-order" *ngIf="order.problem">
-                <mat-icon>warning</mat-icon>
+                <md-icon>warning</md-icon>
                 {{ order.problem }}
               </div>
               <div class="comment-order" *ngIf="order.date || order.timeFrom || order.timeTo">
-                <mat-icon>update</mat-icon>
+                <md-icon>update</md-icon>
                 {{ order.date | date }} {{ order.timeFrom ? order.timeFrom : '' }}{{ order.timeTo ? (' - ' + order.timeTo) : '' }}
               </div>
               <div class="comment-order">
-                <mat-icon>person pin</mat-icon>
+                <md-icon>person pin</md-icon>
                 {{ (order.userDetails && order.userDetails.firstName ?  order.userDetails.firstName: '' ) + ' ' + (order.userDetails && order.userDetails.lastName ?  order.userDetails.lastName: '' )}}
               </div>
               <div class="comment-order" *ngIf="order.comment">
-                <mat-icon>comment</mat-icon>
+                <md-icon>comment</md-icon>
                 {{ order.comment }}
               </div>
               <br/>
@@ -77,30 +77,30 @@
   </div>
 
   <div *ngIf="selectedOrder" class="outer-right">
-    <mat-icon style="cursor: pointer" (click)="selectedOrder = null">close</mat-icon>
+    <md-icon style="cursor: pointer" (click)="selectedOrder = null">close</md-icon>
     <app-order-edit [order]="selectedOrder" [colors]="colors" [users]="users" (orderUpdated)="searchForOrders(); selectedOrder = null"></app-order-edit>
   </div>
 
-  <button mat-raised-button *ngIf="!sidenav.opened" type="button" (click)="sidenav.open()" class="hide-button">
-    <mat-icon>keyboard_arrow_left</mat-icon>
+  <button md-raised-button *ngIf="!sidenav.opened" type="button" (click)="sidenav.open()" class="hide-button">
+    <md-icon>keyboard_arrow_left</md-icon>
   </button>
   <div *ngIf="doFilterOrders" class="most-right">
-    <mat-list class="scrollable-2">
+    <md-list class="scrollable-2">
 
-    </mat-list>
+    </md-list>
   </div>
 
-  <mat-sidenav #sidenav class="example-sidenav" mode="side" position="end" align="end">
-    <mat-icon style="cursor: pointer; font-size: 18px;" (click)="sidenav.close()">close</mat-icon>
-    <button mat-raised-button (click)="deleteMultipleOrders()">Delete by date</button>
-    <button mat-raised-button (click)="enableArchiveModeOrDelete()" *ngIf="orders && orders.length">Delete</button>
-    <button mat-raised-button (click)="filterOrdersWithoutDate()">No Date</button>
+  <md-sidenav #sidenav class="example-sidenav" mode="side" position="end" align="end">
+    <md-icon style="cursor: pointer; font-size: 18px;" (click)="sidenav.close()">close</md-icon>
+    <button md-raised-button (click)="deleteMultipleOrders()">Delete by date</button>
+    <button md-raised-button (click)="enableArchiveModeOrDelete()" *ngIf="orders && orders.length">Delete</button>
+    <button md-raised-button (click)="filterOrdersWithoutDate()">No Date</button>
     <div>
       <!--<form autocomplete="off">-->
         <div *ngIf="archiveMode && orders && orders.length">
-          <mat-checkbox [(ngModel)]="allSelected" (change)="selectAll()">Select All</mat-checkbox>
-          <mat-checkbox [(ngModel)]="selectFromMode" (change)="selectFromModeOn()">Select From</mat-checkbox>
-          <mat-checkbox [(ngModel)]="selectToMode" (change)="selectToModeOn()">Select To</mat-checkbox>
+          <md-checkbox [(ngModel)]="allSelected" (change)="selectAll()">Select All</md-checkbox>
+          <md-checkbox [(ngModel)]="selectFromMode" (change)="selectFromModeOn()">Select From</md-checkbox>
+          <md-checkbox [(ngModel)]="selectToMode" (change)="selectToModeOn()">Select To</md-checkbox>
         </div>
       <div style="width: 90px;
     float: left;
@@ -112,9 +112,9 @@
           <p-calendar showIcon="true" dateFormat="mm/dd/yy" [(ngModel)]="search.date" (ngModelChange)="massFilterOrders()"></p-calendar>
         </div>
         <div>
-          <mat-input-container>
-            <input matInput placeholder="Search" [(ngModel)]="search.search" (ngModelChange)="massFilterOrders()"/>
-          </mat-input-container>
+          <md-input-container>
+            <input mdInput placeholder="Search" [(ngModel)]="search.search" (ngModelChange)="massFilterOrders()"/>
+          </md-input-container>
         </div>
       <!--</form>-->
     </div>
@@ -124,6 +124,6 @@
                       [archiveMode]="archiveMode" (orderSelected)="orderHasBeenSelected(i)"
                       [colors]="colors" [users]="users"></app-order-view>
     </ng-container>
-  </mat-sidenav>
+  </md-sidenav>
 
-</mat-sidenav-container>
+</md-sidenav-container>

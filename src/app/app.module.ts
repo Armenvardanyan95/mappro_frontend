@@ -8,9 +8,9 @@ import {AccordionModule, DataTableModule, ButtonModule,
     DropdownModule, CalendarModule, MultiSelectModule, DataListModule, PanelModule, MenubarModule, OverlayPanelModule, ChipsModule} from 'primeng/primeng';
 
 import {
-  MatInputModule, MatToolbarModule, MatButtonModule, MatDatepickerModule,
-  MatNativeDateModule, MatCardModule, MatDialogModule, MatSnackBarModule, MatSnackBar,
-  MatSelectModule, MatAutocompleteModule, MatListModule, MatIconModule, MatCheckboxModule, MatChipsModule, MatSidenavModule
+  MdInputModule, MdToolbarModule, MdButtonModule, MdDatepickerModule,
+  MdNativeDateModule, MdCardModule, MdDialogModule, MdSnackBarModule, MdSnackBar,
+  MdSelectModule, MdAutocompleteModule, MdListModule, MdIconModule, MdCheckboxModule, MdChipsModule, MdSidenavModule
 } from '@angular/material';
 import { AgmCoreModule, MarkerManager, GoogleMapsAPIWrapper } from '@agm/core';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -47,7 +47,7 @@ import { TableComponent } from './table/table.component';
 import {UserDeleteComponent} from "./user-delete/user-delete.component";
 import { OrdersByIDPipe } from './common/pipes/orders-by-id.pipe';
 import {BrowserService} from "./common/services/browser.service";
-import { FlexLayoutModule } from "@angular/flex-layout";
+
 
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -93,24 +93,24 @@ const routes: Routes = [
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    MatDialogModule,
+    MdInputModule,
+    MdToolbarModule,
+    MdButtonModule,
+    MdNativeDateModule,
+    MdDatepickerModule,
+    MdDialogModule,
     MultiSelectModule,
-    MatIconModule,
-    MatSelectModule,
+    MdIconModule,
+    MdSelectModule,
     AccordionModule,
     DataTableModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatAutocompleteModule,
-    MatCardModule,
-    MatSidenavModule,
-    MatCheckboxModule,
-    MatListModule,
+    MdSnackBarModule,
+    MdChipsModule,
+    MdAutocompleteModule,
+    MdCardModule,
+    MdSidenavModule,
+    MdCheckboxModule,
+    MdListModule,
     ColorPickerModule,
     CalendarModule,
     DataListModule,
@@ -130,7 +130,7 @@ const routes: Routes = [
     }),
     RouterModule.forRoot(routes)
   ],
-  providers: [UserService, MatSnackBar, AuthGuard, IsAdminGuard, IsNotAdminGuard, ColorMarkerService,
+  providers: [UserService, MdSnackBar, AuthGuard, IsAdminGuard, IsNotAdminGuard, ColorMarkerService,
     GoogleMapsService, OrderService, MarkerManager, GoogleMapsAPIWrapper, BrowserService],
   bootstrap: [AppComponent]
 })

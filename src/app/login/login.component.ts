@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Response} from "@angular/http";
-import {MatSnackBar} from '@angular/material';
+import {MdSnackBar} from '@angular/material';
 import {LocalStorageService} from 'angular-2-local-storage';
 
 import {UserService} from 'app/common/services';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   public submitted: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-              private localStorage: LocalStorageService, private router: Router, private snackBar: MatSnackBar) {
+              private localStorage: LocalStorageService, private router: Router, private snackBar: MdSnackBar) {
     this.form = formBuilder.group({
       'password': ['', Validators.required],
       'username': ['', Validators.required],

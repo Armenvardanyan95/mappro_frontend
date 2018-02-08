@@ -1,6 +1,6 @@
 <div class="order-view-div" (contextmenu)="openEditDialog($event)" (click)="showDetails()">
   <div class="order-name" color="primary">
-    <mat-checkbox [(ngModel)]="order.isSelected" *ngIf="archiveMode" (click)="$event.stopPropagation()" (change)="selected()"></mat-checkbox>
+    <md-checkbox [(ngModel)]="order.isSelected" *ngIf="archiveMode" (click)="$event.stopPropagation()" (change)="selected()"></md-checkbox>
     <div class="image-marker rwgerg-parent">
       <img class="icon-right small marker-view" [src]="order.colorMarkerDetails.image" alt="marker">
       <span class="h2-marker">{{ index }}</span>
@@ -9,30 +9,30 @@
   </div>
 </div>
 <ng-container *ngIf="order.isVisible">
-    <mat-list class="only-this-margin" (dblclick)="openEditDialog()">
+    <md-list class="only-this-margin" (dblclick)="openEditDialog()">
       <h6 class="inner-div">
-        <mat-icon class="address-icon">home</mat-icon>
+        <md-icon class="address-icon">home</md-icon>
         {{ order.address }}
       </h6>
       <div class="comment-order" *ngIf="order.mobilePhone">
-        <mat-icon>phone</mat-icon> {{ order.mobilePhones.join(', ') }}
+        <md-icon>phone</md-icon> {{ order.mobilePhones.join(', ') }}
       </div>
       <div class="comment-order" *ngIf="order.problem">
-        <mat-icon>warning</mat-icon>
+        <md-icon>warning</md-icon>
         {{ order.problem }}
       </div>
       <div class="comment-order" *ngIf="order.date || order.timeFrom || order.timeTo">
-        <mat-icon>update</mat-icon>
+        <md-icon>update</md-icon>
         {{ order.date | date }} {{ order.timeFrom ? order.timeFrom : '' }}{{ order.timeTo ? (' - ' + order.timeTo) : '' }}
       </div>
       <div class="comment-order">
-        <mat-icon>person pin</mat-icon>
+        <md-icon>person pin</md-icon>
         {{ (order.userDetails && order.userDetails.firstName ?  order.userDetails.firstName: '' ) + ' ' + (order.userDetails && order.userDetails.lastName ?  order.userDetails.lastName: '' )}}
       </div>
       <div class="comment-order" *ngIf="order.comment">
-       <mat-icon>comment</mat-icon>
+       <md-icon>comment</md-icon>
         {{ order.comment }}
       </div>
-    </mat-list>
+    </md-list>
 </ng-container>
 

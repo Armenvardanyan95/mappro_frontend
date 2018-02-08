@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {MatDialog, MatDialogRef, MatDialogConfig} from '@angular/material';
+import {MdDialog, MdDialogRef, MdDialogConfig} from '@angular/material';
 
 import {OrderEditComponent} from "../order-edit/order-edit.component";
 
@@ -21,12 +21,12 @@ export class OrderViewComponent implements OnInit {
   @Output() orderSelected: EventEmitter<number> = new EventEmitter();
   @Output() orderUpdated: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MdDialog) { }
 
   ngOnInit() {
   }
 
-  private setEditDialogData(dialog: MatDialogRef<OrderEditComponent>): void {
+  private setEditDialogData(dialog: MdDialogRef<OrderEditComponent>): void {
     dialog.componentInstance.colors = this.colors;
     dialog.componentInstance.users = this.users;
     dialog.componentInstance.order = this.order;
@@ -39,7 +39,7 @@ export class OrderViewComponent implements OnInit {
 
   openEditDialog(event: Event): void {
     event.preventDefault();
-    const dialog: MatDialogRef<OrderEditComponent> = this.dialog.open(OrderEditComponent, <MatDialogConfig>{
+    const dialog: MdDialogRef<OrderEditComponent> = this.dialog.open(OrderEditComponent, <MdDialogConfig>{
       width: '500px',
       height: '850px'
     });

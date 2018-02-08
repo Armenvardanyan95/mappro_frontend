@@ -3,7 +3,7 @@
             (onArchived)="archived($event)" [archiveMode]="archiveMode" (shouldUpdateColors)="getColors()"
             (canArchivate)="archiveMode = $event" (shouldUpdateOrders)="getOrders()"></app-header>
 
-<mat-card class="card-with-map">
+<md-card class="card-with-map">
   <agm-map [zoom]="zoom"
     [latitude]="markerCoordinates ? markerCoordinates.lat : currentPlace.lat" [longitude]="markerCoordinates ? markerCoordinates.lng : currentPlace.lng"
     (mapRightClick)="setMarker($event)">
@@ -17,41 +17,41 @@
                 [title]="order.name"></agm-marker>
   </agm-map>
 
-</mat-card>
+</md-card>
 
 
 <div class="scrollable" #listOfOrders>
-  <mat-list>
-    <mat-card  *ngIf="showNewOrderForm" class="mat-lav-card">
+  <md-list>
+    <md-card  *ngIf="showNewOrderForm" class="md-lav-card">
 
       <app-order-edit [(currentPlace)]="markerCoordinates" (orderUpdated)="getOrders(); resetMarkerToLastLocation(); showNewOrderForm = false"
                       [colors]="colors" [users]="users"></app-order-edit>
 
-    </mat-card>
+    </md-card>
 
     <div *ngIf="archiveMode">
-      <mat-checkbox [(ngModel)]="allSelected" (change)="selectAll()">Select All</mat-checkbox>
-      <mat-checkbox [(ngModel)]="selectFromMode" (change)="selectFromModeOn()">Select From</mat-checkbox>
-      <mat-checkbox [(ngModel)]="selectToMode" (change)="selectToModeOn()">Select To</mat-checkbox>
+      <md-checkbox [(ngModel)]="allSelected" (change)="selectAll()">Select All</md-checkbox>
+      <md-checkbox [(ngModel)]="selectFromMode" (change)="selectFromModeOn()">Select From</md-checkbox>
+      <md-checkbox [(ngModel)]="selectToMode" (change)="selectToModeOn()">Select To</md-checkbox>
     </div>
 
     <p-multiSelect [options]="colors | map : mapColorsToSelectItem" [(ngModel)]="search.colors" (ngModelChange)="searchOrders()" defaultLabel="Colors"></p-multiSelect>
     <p-multiSelect class="user-select" [options]="users | map : mapUsersToSelectItem" [(ngModel)]="search.users" (ngModelChange)="searchOrders()" defaultLabel="Users"></p-multiSelect>
     <br>
-    <mat-input-container>
-      <input autocomplete="off" [(ngModel)]="search.query" (ngModelChange)="searchOrders()" placeholder="Search" matInput/>
-    </mat-input-container>
+    <md-input-container>
+      <input autocomplete="off" [(ngModel)]="search.query" (ngModelChange)="searchOrders()" placeholder="Search" mdInput/>
+    </md-input-container>
 
-    <mat-input-container>
-      <input type="number" autocomplete="off" [(ngModel)]="idQuery" placeholder="Search by Rank" matInput/>
-    </mat-input-container>
+    <md-input-container>
+      <input type="number" autocomplete="off" [(ngModel)]="idQuery" placeholder="Search by Rank" mdInput/>
+    </md-input-container>
 
     <ng-container *ngFor="let order of (orders | ordersByID : idQuery); let i=index">
         <app-order-view [index]="order.notArchivedRank" [order]="order" (orderMadeVisible)="changeOrderVisibility(order)"
                         [archiveMode]="archiveMode" (orderSelected)="orderHasBeenSelected($event)"
                         [colors]="colors" [users]="users" (orderUpdated)="getOrders()"></app-order-view>
     </ng-container>
-  </mat-list>
+  </md-list>
 </div>
 
 <app-footer (userCreated)="getUsers()" (userDeleted)="getUsers()"></app-footer>
