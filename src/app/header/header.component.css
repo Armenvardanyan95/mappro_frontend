@@ -18,7 +18,7 @@ button {
 }
 .header-right-block button{
 	border-radius: 0px !important;
-  height: 31px !important;
+  height: 31px;
   top: -4px;
 }
 .new-order-btn, .mat-raised-button{
@@ -40,7 +40,7 @@ button {
   position: absolute;
 }
 .mat-toolbar.mat-primary{
-	background: #000 !important;
+	background: #000;
 }
 .mat-raised-button{
 	border-radius: 0px !important;
@@ -75,3 +75,73 @@ button {
   right: 20em;
   color: #fff;
 }
+
+
+
+/*responsive*/
+@media screen and (max-width:1110px){
+  .mat-toolbar.mat-primary[_ngcontent-c2] {
+    height: 70px;
+  }
+  .calendar-div2[_ngcontent-c2] a[_ngcontent-c2] {
+    position: fixed;
+    top: 38px;
+  }
+  .calendar-div[_ngcontent-c2] a[_ngcontent-c2] {
+    position: fixed;
+    top:38px;
+  }
+}
+@media screen and (min-width: 701px) and (max-width:1110px){
+  .calendar-div2[_ngcontent-c2] a[_ngcontent-c2] {
+    left: 60%;
+  }
+  .calendar-div[_ngcontent-c2] a[_ngcontent-c2] {
+    left: 30%;
+  }
+}
+@media screen and (min-width: 600px) and (max-width:700px){
+  .header-right-block[_ngcontent-c2] {
+    top: 35px;
+  }
+  .calendar-div[_ngcontent-c2][_ngcontent-c2] a[_ngcontent-c2][_ngcontent-c2] {
+    position: absolute;
+    top: 5px;
+    right: 420px;
+}
+}
+@media screen and (min-width: 450px) and (max-width:599px){
+  .header-right-block[_ngcontent-c2] {
+    top: 35px;
+  }
+  .header-right-block[_ngcontent-c2] {
+    top: 35px;
+  }
+  .calendar-div[_ngcontent-c2][_ngcontent-c2] a[_ngcontent-c2][_ngcontent-c2] {
+    font-size:15px;
+  }
+  .calendar-div2[_ngcontent-c2][_ngcontent-c2] a[_ngcontent-c2][_ngcontent-c2] {
+    font-size:15px;
+  }
+}
+@media screen and (min-width: 360px) and (max-width:449px){
+  .header-right-block[_ngcontent-c2] {
+    top: 35px;
+  }
+  .header-right-block[_ngcontent-c2] {
+    top: 35px;
+  }
+  .calendar-div[_ngcontent-c2][_ngcontent-c2] a[_ngcontent-c2][_ngcontent-c2] {
+    font-size:12px;
+  }
+  .calendar-div2[_ngcontent-c2][_ngcontent-c2] a[_ngcontent-c2][_ngcontent-c2] {
+    font-size:12px;
+  }
+  .calendar-div[_ngcontent-c2] a[_ngcontent-c2] {
+    right: 25.6em;
+  }
+  .calendar-div2[_ngcontent-c2] a[_ngcontent-c2] {
+    right: 23em;
+  }
+}
+
