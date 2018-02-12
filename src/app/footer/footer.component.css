@@ -20,7 +20,7 @@ button {
 }
  .users-button{
 	right: 3px;
-} 
+}
 .new-user{
 	left: 3px;
 }
@@ -32,12 +32,12 @@ button {
 }
 @media screen and (max-width: 945px) {
     .footer{
-		width: 60.1% !important;
+		width: 60.1%;
 	}
 }
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 650px) {
     .footer{
-		width: 40.1% !important;
+		width: 100%;
 	}
 }
 @media screen and (max-width: 527px) {
