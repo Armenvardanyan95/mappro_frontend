@@ -88,5 +88,9 @@ app-footer {
   .card-with-map {
     width: 100% !important;
   }
+  agm-map[_ngcontent-c1] {
+    height: 350px;
+    width: 100%;
+  }
 }
 
