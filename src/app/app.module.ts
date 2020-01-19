@@ -47,6 +47,7 @@ import { TableComponent } from './table/table.component';
 import {UserDeleteComponent} from "./user-delete/user-delete.component";
 import { OrdersByIDPipe } from './common/pipes/orders-by-id.pipe';
 import {BrowserService} from "./common/services/browser.service";
+import { OrdersBySearchPipe } from './common/pipes/orders-by-search.pipe';
 
 
 const routes: Routes = [
@@ -83,7 +84,8 @@ const routes: Routes = [
     TimeAmPmPipe,
     ColorPipe,
     TableComponent,
-    OrdersByIDPipe
+    OrdersByIDPipe,
+    OrdersBySearchPipe
   ],
   entryComponents: [UserProfileComponent, UserListComponent, UserDeleteComponent,
     ColorMarkerComponent, OrderEditComponent, ColorMarkerDeleteComponent, OrderDeleteComponent, OrderDeleteByDateComponent],

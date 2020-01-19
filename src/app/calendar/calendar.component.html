@@ -34,7 +34,7 @@
           <ng-container *ngFor="let order of day[d].orders">
             <div class="order-cell" (contextmenu)="selectOrder(order, $event)" (click)="details.toggle($event)"
                  [style.background]="makeRGBWithAlpha(order.colorMarkerDetails.color)" [style.border-color]="order.colorMarkerDetails.color">
-              <strong class="wrap" style="font-weight: bolder">{{order.rank }}<br/> {{ order.name }}
+              <strong class="wrap" style="font-weight: bolder">{{order.rank }} {{ order.isArchived ? '' : ' / ' + order.notArchivedRank }}<br/> {{ order.name }}
                 <md-icon style="cursor: pointer;  position: absolute; right: 0;font-size: 18px; width: 16px; top: -2px" (click)="deleteOrder($event, order)" title="Delete">close</md-icon>
               </strong>
             </div>

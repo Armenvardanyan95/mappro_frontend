@@ -6,8 +6,8 @@ import {LocalStorageService} from "angular-2-local-storage";
 @Injectable()
 export class OrderService {
 
-  private baseUrl: string = 'http://mappro.vioo.xyz:8000/orders/';
-  private baseUrlWithoutOrders: string = 'http://mappro.vioo.xyz:8000/';
+  private baseUrl: string = 'https://mappro.herokuapp.com//orders/';
+  private baseUrlWithoutOrders: string = 'https://mappro.herokuapp.com/';
 
   constructor(private http: Http, private localStorage: LocalStorageService) { }
 

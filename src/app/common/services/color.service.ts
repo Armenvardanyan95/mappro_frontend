@@ -7,7 +7,7 @@ import {SelectItem} from "primeng/components/common/selectitem";
 @Injectable()
 export class ColorMarkerService {
 
-  private baseUrl: string = 'http://mappro.vioo.xyz:8000/colors/';
+  private baseUrl: string = 'https://mappro.herokuapp.com/colors/';
 
   constructor(private http: Http, private localStorage: LocalStorageService) { }
 

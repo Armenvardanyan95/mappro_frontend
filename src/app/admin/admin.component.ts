@@ -63,19 +63,6 @@ export class AdminComponent implements OnInit {
     this.users.push(user);
   }
 
-  searchOrders(): void {
-    this.orders = this.allOrders.filter((order: IOrder) => {
-      const query = this.search.query.toLowerCase();
-      const orderBelongsToUser: boolean = this.search.users.length ? order.user && this.search.users.indexOf(order.userDetails.id) !== -1 : true;
-      const orderBelongsToColor: boolean = this.search.colors.length ? order.colorMarkerDetails && this.search.colors.indexOf(order.colorMarkerDetails.id) !== -1 : true;
-      return orderBelongsToUser && orderBelongsToColor && (
-          order.address.toLowerCase().indexOf(query) !== -1 ||
-          order.mobilePhone.toLowerCase().indexOf(query) !== -1 ||
-          order.name && order.name.toLowerCase().indexOf(query) !== -1
-        );
-    })
-  }
-
   selectFromModeOn() {
     this.selectToMode = false;
     this.allSelected = false;
@@ -101,6 +88,17 @@ export class AdminComponent implements OnInit {
     this.getUsers();
     this.getColors();
     this.getOrders();
+  }
+
+  public getOrderTitle(order: IOrder) : string {
+    return `
+${order.name}
+${(order.mobilePhone || "").split('&').join(', ')}
+
+${order.problem}
+
+${order.comment}
+    `
   }
 
   public getUsers(): void {

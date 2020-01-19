@@ -10,7 +10,7 @@ declare const gapi: any;
 @Injectable()
 export class GoogleMapsService {
 
-  private autocompleteUrl: string = `http://mappro.vioo.xyz:8000/google-maps-autocomplete/`;
+  private autocompleteUrl: string = `https://mappro.herokuapp.com/google-maps-autocomplete/`;
   private locationByIDUrl: string = `https://maps.googleapis.com/maps/api/geocode/json?key=${environment.googleMapsApiKey}`
 
   constructor(private http: Http, private mapsAPILoader: MapsAPILoader) { }

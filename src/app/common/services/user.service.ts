@@ -9,9 +9,9 @@ import {SelectItem} from "primeng/components/common/selectitem";
 @Injectable()
 export class UserService {
 
-  private baseUrl: string = 'http://mappro.vioo.xyz:8000/users/';
-  private baseUrlWithoutUser: string = 'http://mappro.vioo.xyz:8000/';
-  private baseAuthUrl: string = 'http://mappro.vioo.xyz:8000/api-token-auth/';
+  private baseUrl: string = 'https://mappro.herokuapp.com/users/';
+  private baseUrlWithoutUser: string = 'https://mappro.herokuapp.com/';
+  private baseAuthUrl: string = 'https://mappro.herokuapp.com/api-token-auth/';
 
   constructor(private http: Http, private localStorage: LocalStorageService) {}
 
